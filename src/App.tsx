@@ -1,12 +1,13 @@
 import React from 'react';
-import './scss/app.scss';
+
 import {Header} from "./components/Header";
 import {Categories} from "./components/Categories";
 import {Sort} from "./components/Sort";
 import {PizzaBlock} from "./components/PizzaBlock";
-import {Pagination} from "./components/Pagination";
 
-function App() {
+import './scss/app.scss';
+
+export const App = () => {
     return (
         <div className="wrapper">
             <Header/>
@@ -18,16 +19,12 @@ function App() {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        <PizzaBlock/>
-                        <PizzaBlock/>
-                        <PizzaBlock/>
-                        <PizzaBlock/>
+                        <PizzaBlock title="Маргарита" price={500} />
                     </div>
-                    <Pagination/>
+                    {/*<Pagination/>*/}
                 </div>
             </div>
         </div>
     );
 }
 
-export default App;
