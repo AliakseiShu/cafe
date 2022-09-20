@@ -51,6 +51,20 @@ export const Header = () => {
         </div>
     )
 }
+export const Categories = () => {
+    return (
+        <div className="categories">
+            <ul>
+                <li className="active">Все</li>
+                <li className="">Мясные</li>
+                <li className="">Вегетарианская</li>
+                <li className="">Гриль</li>
+                <li className="">Острые</li>
+                <li className="">Закрытые</li>
+            </ul>
+        </div>
+    )
+}
 
 function App() {
     return (
@@ -59,16 +73,7 @@ function App() {
             <div className="content">
                 <div className="container">
                     <div className="content__top">
-                        <div className="categories">
-                            <ul>
-                                <li className="active">Все</li>
-                                <li className="">Мясные</li>
-                                <li className="">Вегетарианская</li>
-                                <li className="">Гриль</li>
-                                <li className="">Острые</li>
-                                <li className="">Закрытые</li>
-                            </ul>
-                        </div>
+                        <Categories/>
                         <div className="sort">
                             <div className="sort__label">
                                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none"
