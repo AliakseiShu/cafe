@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, { FC, useState } from "react";
 
 type PizzaBlockType = {
     title: string
@@ -8,7 +8,7 @@ type PizzaBlockType = {
 export const PizzaBlock:FC<PizzaBlockType> = ({title,price}) => {
     const [pizzaCount, setPizzaCount] = useState(0);
 
-    const onclickHandler = () => {
+    const onclickHandlerButton = () => {
         setPizzaCount(pizzaCount + 1)
     }
 
@@ -39,7 +39,7 @@ export const PizzaBlock:FC<PizzaBlockType> = ({title,price}) => {
                                 d="M10.8 4.8H7.2V1.2C7.2 0.5373 6.6627 0 6 0C5.3373 0 4.8 0.5373 4.8 1.2V4.8H1.2C0.5373 4.8 0 5.3373 0 6C0 6.6627 0.5373 7.2 1.2 7.2H4.8V10.8C4.8 11.4627 5.3373 12 6 12C6.6627 12 7.2 11.4627 7.2 10.8V7.2H10.8C11.4627 7.2 12 6.6627 12 6C12 5.3373 11.4627 4.8 10.8 4.8Z"
                                 fill="white"></path>
                         </svg>
-                        <span onClick={onclickHandler}>Добавить</span>
+                        <span onClick={onclickHandlerButton}>Добавить</span>
                         <i>{pizzaCount}</i>
                     </button>
                 </div>

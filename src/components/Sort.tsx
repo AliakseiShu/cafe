@@ -16,7 +16,7 @@ export const Sort = () => {
             <div className="sort__popup">
                 <ul>
                     <li className="active">популярности</li>
-                    <li>Цене</li>
+                    <li>цене</li>
                     <li>алфавиту</li>
                 </ul>
             </div>

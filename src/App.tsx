@@ -20,6 +20,7 @@ export const App = () => {
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
                         <PizzaBlock title="Маргарита" price={500} />
+                        <PizzaBlock title="Маргарита" price={500} />
                     </div>
                     {/*<Pagination/>*/}
                 </div>
