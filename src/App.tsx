@@ -3,18 +3,18 @@ import React, {useEffect, useState} from 'react';
 import {Header} from "./components/Header";
 import {Categories} from "./components/Categories";
 import {Sort} from "./components/Sort";
-import {PizzaBlock} from "./components/PizzaBlock";
 
 import './scss/app.scss';
+import {Skeleton} from "./components/PizzaBlock/Skeleton";
+
 export const App = () => {
     const [items, setItems] = useState<any[]>([]);
-    console.log(items)
+
     useEffect(() => {
         fetch('https://632c1cb15568d3cad87cfbac.mockapi.io/items').then((response) => {
             return response.json()
         }).then(arr => {
             setItems(arr)
-
         })
     },[])
 
@@ -29,8 +29,9 @@ export const App = () => {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        {items.map((item) => (
-                            <PizzaBlock key={item.id} {...item}/>
+                        {items && items.map((item) => (
+                            <Skeleton />
+                            //<PizzaBlock key={item.id} {...item}/>
                         ))}
                     </div>
                     {/*<Pagination/>*/}
