@@ -15,19 +15,13 @@ export const App = () => {
             <div className="content">
                 <div className="container">
                     <div className="content__top">
-                        <Categories/>
+                        {/*<Categories/>*/}
                         <Sort/>
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     <div className="content__items">
-                        {pizzas.map((pizza, index) => (
-                            <PizzaBlock key={index}
-                                title={pizza.title}
-                                price={pizza.price}
-                                imageUrl={pizza.imageUrl}
-                                sizes={pizza.sizes}
-                                types={pizza.types}
-                            />
+                        {pizzas.map((pizza) => (
+                            <PizzaBlock key={pizza.id} {...pizza}/>
                         ))}
                     </div>
                     {/*<Pagination/>*/}

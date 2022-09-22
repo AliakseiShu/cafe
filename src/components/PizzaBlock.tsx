@@ -9,7 +9,6 @@ type PizzaBlockType = {
 }
 
 export const PizzaBlock: FC<PizzaBlockType> = ({title, price, imageUrl, sizes, types}) => {
-
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
@@ -24,8 +23,8 @@ export const PizzaBlock: FC<PizzaBlockType> = ({title, price, imageUrl, sizes, t
                 className="pizza-block__title">{title}</h4></a>
                 <div className="pizza-block__selector">
                     <ul>
-                        {types.map((type, index) => (
-                            <li onClick={() => setActiveType(type)} key={index}
+                        {types.map((type) => (
+                            <li key={type} onClick={() => setActiveType(type)}
                                 className={activeType === type ? "active" : ''}>{typeNames[type]}</li>
                         ))}
                     </ul>
