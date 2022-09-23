@@ -30,7 +30,8 @@ export const Home = () => {
 
     useEffect(() => {
         setIsLoading(true)
-        fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?${categoryId > 0 ? `category=${categoryId}` : ''}`)
+        fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?${categoryId > 0 ? `category=${categoryId}` : ''
+        }&sortBy=${sortType}`)
             .then((response) => {
             return response.json()
         }).then(arr => {
