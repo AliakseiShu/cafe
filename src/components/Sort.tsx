@@ -10,11 +10,13 @@ export const Sort: FC<SortValue> = ({sortValue, onClickSort}) => {
     const [open, setOpen] = useState(false);
 
     const list = [
-        {name: 'популярности', sortProperty: 'rating'},
-        {name: 'цене', sortProperty: 'price'},
-        {name: 'алфавиту', sortProperty: 'title'},
+        {name: 'популярности (DESC)', sortProperty: 'rating'},
+        {name: 'популярности (ASK)', sortProperty: '-rating'},
+        {name: 'цене (DESC)', sortProperty: 'price'},
+        {name: 'цене (ASK)', sortProperty: '-price'},
+        {name: 'алфавиту (DESC)', sortProperty: 'title'},
+        {name: 'алфавиту (ASK)', sortProperty: '-title'},
     ]
-    //const sortName = list[sortValue].name
 
     const onClickListItem = (sortProperty: sortTypeProps) => {
         onClickSort(sortProperty)

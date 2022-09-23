@@ -27,11 +27,14 @@ export const Home = () => {
     const onClickSort = (sortProperty: sortTypeProps) => {
         setSortType(sortProperty)
     }
+    const sortBy = sortType.sortProperty.replace('-','')
+    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
+    const category = categoryId > 0 ? `category=${categoryId}` : ''
+
 
     useEffect(() => {
         setIsLoading(true)
-        fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?${categoryId > 0 ? `category=${categoryId}` : ''
-        }&sortBy=${sortType}`)
+        fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`)
             .then((response) => {
             return response.json()
         }).then(arr => {
@@ -39,8 +42,6 @@ export const Home = () => {
             setIsLoading(false)
         })
     }, [categoryId, sortType])
-
-    console.log(categoryId, sortType)
 
     return (
         <div className="container">
