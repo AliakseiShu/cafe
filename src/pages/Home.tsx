@@ -19,7 +19,6 @@ export const Home = () => {
         sortProperty: 'rating'
     });
 
-
     const onClickCategory = (index: number) => {
         setCategoryId(index)
     }
@@ -27,7 +26,7 @@ export const Home = () => {
     const onClickSort = (sortProperty: sortTypeProps) => {
         setSortType(sortProperty)
     }
-    const sortBy = sortType.sortProperty.replace('-','')
+    const sortBy = sortType.sortProperty.replace('-', '')
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
     const category = categoryId > 0 ? `category=${categoryId}` : ''
 
@@ -36,8 +35,8 @@ export const Home = () => {
         setIsLoading(true)
         fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`)
             .then((response) => {
-            return response.json()
-        }).then(arr => {
+                return response.json()
+            }).then(arr => {
             setItems(arr)
             setIsLoading(false)
         })
