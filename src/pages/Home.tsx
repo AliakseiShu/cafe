@@ -20,7 +20,7 @@ export const Home = () => {
     }, [])
 
     return (
-        <>
+        <div className="container">
             <div className="content__top">
                 <Categories/>
                 <Sort/>
@@ -31,9 +31,7 @@ export const Home = () => {
                     : items.map((item) => <PizzaBlock key={item.id} {...item}/>
                     )}
             </div>
-            {/*<Pagination/>*/}
-        </>
-
+        </div>
     );
 };
 
