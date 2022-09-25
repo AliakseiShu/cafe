@@ -4,6 +4,8 @@ import {Sort} from "../components/Sort";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {ItemsType} from "../App";
+import {Pagination} from "../components/Pagination/Pagination";
+import ReactPaginate from "react-paginate";
 
 export type sortTypeProps = {
     name: string
@@ -50,6 +52,7 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
     const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item}/>)
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
 
+
     return (
         <div className="container">
             <div className="content__top">
@@ -60,6 +63,7 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
             <div className="content__items">
                 {isLoading ? skeletons : pizzas}
             </div>
+            <Pagination/>
         </div>
     );
 };
