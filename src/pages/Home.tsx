@@ -20,6 +20,7 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
     const [items, setItems] = useState<ItemsType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [categoryId, setCategoryId] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [sortType, setSortType] = useState<sortTypeProps>({
         name: 'популярности',
         sortProperty: 'rating'
@@ -40,18 +41,18 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
 
     useEffect(() => {
         setIsLoading(true)
-        fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`)
+        fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
             .then((response) => {
                 return response.json()
             }).then(arr => {
             setItems(arr)
             setIsLoading(false)
         })
-    }, [categoryId, sortType, searchValue])
+        window.scroll(0,0)
+    }, [categoryId, sortType, searchValue, currentPage])
 
     const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item}/>)
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
-
 
     return (
         <div className="container">
@@ -63,7 +64,7 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
             <div className="content__items">
                 {isLoading ? skeletons : pizzas}
             </div>
-            <Pagination/>
+            <Pagination onChangePage={(number) => setCurrentPage(number)}/>
         </div>
     );
 };
