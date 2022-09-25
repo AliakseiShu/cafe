@@ -13,6 +13,10 @@ export const Search: FC<SearchType> = ({searchValue, setSearchValue}) => {
         setSearchValue(e.currentTarget.value)
     }
 
+    const onClickClear = () => {
+        setSearchValue('')
+    }
+
     return (
         <div className={styles.root}>
             <img className={styles.icon} src={searchSVG} alt="Search"/>
@@ -20,7 +24,8 @@ export const Search: FC<SearchType> = ({searchValue, setSearchValue}) => {
                    onChange={onChangeSearchValue}
                    className={styles.input}
                    placeholder="Поиск пиццы ..."/>
-            <img src={closeSVG}/>
+            {searchValue &&
+            <img onClick={onClickClear} className={styles.clearIcon} src={closeSVG} alt="Close"/>}
         </div>
     );
 };

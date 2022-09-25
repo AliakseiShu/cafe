@@ -27,7 +27,7 @@ export const App = () => {
             <Header searchValue={searchValue} setSearchValue={setSearchValue}/>
             <div className="content">
                 <Routes>
-                    <Route path="/" element={<Home/>}/>
+                    <Route path="/" element={<Home searchValue={searchValue} setSearchValue={setSearchValue}/>}/>
                     <Route path="/cart" element={<Cart/>}/>
                     <Route path="*" element={<Page404/>}/>
                 </Routes>

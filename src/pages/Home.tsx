@@ -9,8 +9,12 @@ export type sortTypeProps = {
     name: string
     sortProperty: string
 }
+export type HomeType = {
+    searchValue: string
+    setSearchValue: (searchValue: string) => void
+}
 
-export const Home = () => {
+export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
     const [items, setItems] = useState<ItemsType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [categoryId, setCategoryId] = useState(0);
@@ -42,6 +46,14 @@ export const Home = () => {
         })
     }, [categoryId, sortType])
 
+    const pizzas = items.filter(obj => {
+        if (obj.title.toLowerCase().includes(searchValue.toLowerCase())){
+            return true
+        }
+        return false
+    }).map((item) => <PizzaBlock key={item.id} {...item}/>)
+    const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
+
     return (
         <div className="container">
             <div className="content__top">
@@ -50,9 +62,7 @@ export const Home = () => {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {isLoading ? [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
-                    : items.map((item) => <PizzaBlock key={item.id} {...item}/>
-                    )}
+                {isLoading ? skeletons : pizzas}
             </div>
         </div>
     );
