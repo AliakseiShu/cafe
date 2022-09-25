@@ -1,10 +1,16 @@
-import React from "react";
+import React, {FC} from "react";
 
 import logoSVG from '../assets/img/pizza-logo.svg'
 import {NavLink} from "react-router-dom";
 import {Search} from "./Search/Search";
 
-export const Header = () => {
+
+type HeaderType = {
+    searchValue: string
+    setSearchValue: (searchValue:string) => void
+}
+
+export const Header:FC<HeaderType> = ({searchValue,setSearchValue}) => {
     return (
         <div className="header">
             <div className="container">
@@ -19,7 +25,7 @@ export const Header = () => {
                         </div>
                     </div>
                 </NavLink>
-                <Search/>
+                <Search searchValue={searchValue} setSearchValue={setSearchValue}/>
                     <div className="header__cart">
                         <NavLink to="/cart" className="button button--cart">
                             <span>0 ₽</span>
