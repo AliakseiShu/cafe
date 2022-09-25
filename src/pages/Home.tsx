@@ -33,25 +33,21 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
     const sortBy = sortType.sortProperty.replace('-', '')
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
     const category = categoryId > 0 ? `category=${categoryId}` : ''
+    const search = searchValue ? `&search=${searchValue}` : ''
 
 
     useEffect(() => {
         setIsLoading(true)
-        fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`)
+        fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`)
             .then((response) => {
                 return response.json()
             }).then(arr => {
             setItems(arr)
             setIsLoading(false)
         })
-    }, [categoryId, sortType])
+    }, [categoryId, sortType, searchValue])
 
-    const pizzas = items.filter(obj => {
-        if (obj.title.toLowerCase().includes(searchValue.toLowerCase())){
-            return true
-        }
-        return false
-    }).map((item) => <PizzaBlock key={item.id} {...item}/>)
+    const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item}/>)
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
 
     return (
