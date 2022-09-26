@@ -1,20 +1,23 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {ChangeEvent, FC, useContext} from 'react';
 import styles from './Search.module.scss';
 import searchSVG from '../../assets/img/search_icon.svg'
 import closeSVG from '../../assets/img/close_icon.svg'
+import {SearchContext} from "../../App";
 
-type SearchType = {
-    searchValue: string
-    setSearchValue: (searchValue: string) => void
-}
+export const Search = () => {
 
-export const Search: FC<SearchType> = ({searchValue, setSearchValue}) => {
+    const {searchValue, setSearchValue} = useContext(SearchContext)
+
     const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(e.currentTarget.value)
+        if (setSearchValue) {
+            setSearchValue(e.currentTarget.value)
+        }
     }
 
     const onClickClear = () => {
-        setSearchValue('')
+        if (setSearchValue) {
+            setSearchValue('')
+        }
     }
 
     return (
