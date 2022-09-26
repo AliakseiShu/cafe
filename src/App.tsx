@@ -18,20 +18,29 @@ export type ItemsType = {
     category: number;
     rating: number;
 }
+type ContextTypes = {
+    searchValue: string
+    setSearchValue: (searchValue:string) => void
+}
+
+export const SearchContext = React.createContext<Partial<ContextTypes>>({});
 
 export const App = () => {
     const [searchValue, setSearchValue] = useState("");
 
     return (
         <div className="wrapper">
-            <Header searchValue={searchValue} setSearchValue={setSearchValue}/>
-            <div className="content">
-                <Routes>
-                    <Route path="/" element={<Home searchValue={searchValue} setSearchValue={setSearchValue}/>}/>
-                    <Route path="/cart" element={<Cart/>}/>
-                    <Route path="*" element={<Page404/>}/>
-                </Routes>
-            </div>
+            <SearchContext.Provider value={{searchValue, setSearchValue}}>
+                <Header/>
+                <div className="content">
+                    <Routes>
+                        <Route path="/" element={<Home searchValue={searchValue}
+                                                       setSearchValue={setSearchValue}/>}/>
+                        <Route path="/cart" element={<Cart/>}/>
+                        <Route path="*" element={<Page404/>}/>
+                    </Routes>
+                </div>
+            </SearchContext.Provider>
         </div>
     );
 }
