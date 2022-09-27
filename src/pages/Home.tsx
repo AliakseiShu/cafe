@@ -5,10 +5,11 @@ import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {ItemsType} from "../App";
 import {Pagination} from "../components/Pagination/Pagination";
-import ReactPaginate from "react-paginate";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
-import {setCategoryId, setSort} from "../redux/slices/filerSlice";
+import {setCategoryId} from "../redux/slices/filerSlice";
+import axios, {AxiosError} from "axios";
+import {pizzasApi} from "../api/pizzasApi";
 
 export type SortTypeProps = {
     name: string
@@ -39,13 +40,15 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
 
     useEffect(() => {
         setIsLoading(true)
-        fetch(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
-            .then((response) => {
-                return response.json()
-            }).then(arr => {
-            setItems(arr)
-            setIsLoading(false)
-        })
+        pizzasApi.getPizzas(currentPage,category,sortBy,order,search)
+            .then((res) => {
+                setItems(res.data)
+                setIsLoading(false)
+            })
+            .catch((e) => {
+                const error = e as  AxiosError
+            })
+
         window.scroll(0, 0)
     }, [categoryId, sortType, searchValue, currentPage])
 
