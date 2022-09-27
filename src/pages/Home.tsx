@@ -40,13 +40,13 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
 
     useEffect(() => {
         setIsLoading(true)
-        pizzasApi.getPizzas(currentPage,category,sortBy,order,search)
+        pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
             .then((res) => {
                 setItems(res.data)
                 setIsLoading(false)
             })
             .catch((e) => {
-                const error = e as  AxiosError
+                const error = e as AxiosError
             })
 
         window.scroll(0, 0)

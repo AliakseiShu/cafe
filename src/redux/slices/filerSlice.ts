@@ -29,3 +29,4 @@ export const filterSlice = createSlice({
 
 export const {setCategoryId, setSort} = filterSlice.actions
 export default filterSlice.reducer
+
