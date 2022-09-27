@@ -1,25 +1,26 @@
 import React, {FC, useState} from "react";
-import {sortTypeProps} from "../pages/Home";
+import {SortTypeProps} from "../pages/Home";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../redux/store";
+import {setSort} from "../redux/slices/filerSlice";
 
-type SortValue = {
-    sortValue: sortTypeProps
-    onClickSort: (sortProperty: sortTypeProps) => void
-}
+const list = [
+    {name: 'популярности (DESC)', sortProperty: 'rating'},
+    {name: 'популярности (ASK)', sortProperty: '-rating'},
+    {name: 'цене (DESC)', sortProperty: 'price'},
+    {name: 'цене (ASK)', sortProperty: '-price'},
+    {name: 'алфавиту (DESC)', sortProperty: 'title'},
+    {name: 'алфавиту (ASK)', sortProperty: '-title'},
+]
 
-export const Sort: FC<SortValue> = ({sortValue, onClickSort}) => {
+export const Sort = () => {
     const [open, setOpen] = useState(false);
 
-    const list = [
-        {name: 'популярности (DESC)', sortProperty: 'rating'},
-        {name: 'популярности (ASK)', sortProperty: '-rating'},
-        {name: 'цене (DESC)', sortProperty: 'price'},
-        {name: 'цене (ASK)', sortProperty: '-price'},
-        {name: 'алфавиту (DESC)', sortProperty: 'title'},
-        {name: 'алфавиту (ASK)', sortProperty: '-title'},
-    ]
+    const sort = useSelector((state: RootState) => state.filter.sort)
+    const dispatch = useDispatch()
 
-    const onClickListItem = (sortProperty: sortTypeProps) => {
-        onClickSort(sortProperty)
+    const onClickListItem = (sortProperty: SortTypeProps) => {
+        dispatch(setSort(sortProperty))
         setOpen(false)
     }
 
@@ -33,7 +34,7 @@ export const Sort: FC<SortValue> = ({sortValue, onClickSort}) => {
                         fill="#2C2C2C"></path>
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setOpen(!open)}>{sortValue.name}</span>
+                <span onClick={() => setOpen(!open)}>{sort.name}</span>
             </div>
             {open &&
                 <div className="sort__popup">
@@ -41,7 +42,7 @@ export const Sort: FC<SortValue> = ({sortValue, onClickSort}) => {
                         {list.map((obj, index) => (
                             <li onClick={() => onClickListItem(obj)}
                                 key={obj.name}
-                                className={sortValue.sortProperty === obj.sortProperty ? "active" : ''}>{obj.name}</li>
+                                className={sort.sortProperty === obj.sortProperty ? "active" : ''}>{obj.name}</li>
                         ))}
                     </ul>
                 </div>}

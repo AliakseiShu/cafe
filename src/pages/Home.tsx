@@ -6,8 +6,11 @@ import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {ItemsType} from "../App";
 import {Pagination} from "../components/Pagination/Pagination";
 import ReactPaginate from "react-paginate";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../redux/store";
+import {setCategoryId, setSort} from "../redux/slices/filerSlice";
 
-export type sortTypeProps = {
+export type SortTypeProps = {
     name: string
     sortProperty: string
 }
@@ -19,25 +22,20 @@ export type HomeType = {
 export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
     const [items, setItems] = useState<ItemsType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [categoryId, setCategoryId] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [sortType, setSortType] = useState<sortTypeProps>({
-        name: 'популярности',
-        sortProperty: 'rating'
-    });
+
+    const categoryId = useSelector((state: RootState) => state.filter.categoryId)
+    const sortType = useSelector((state: RootState) => state.filter.sort.sortProperty)
+    const dispatch = useDispatch()
 
     const onClickCategory = (index: number) => {
-        setCategoryId(index)
+        dispatch(setCategoryId(index))
     }
 
-    const onClickSort = (sortProperty: sortTypeProps) => {
-        setSortType(sortProperty)
-    }
-    const sortBy = sortType.sortProperty.replace('-', '')
-    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
+    const sortBy = sortType.replace('-', '')
+    const order = sortType.includes('-') ? 'asc' : 'desc'
     const category = categoryId > 0 ? `category=${categoryId}` : ''
     const search = searchValue ? `&search=${searchValue}` : ''
-
 
     useEffect(() => {
         setIsLoading(true)
@@ -48,7 +46,7 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
             setItems(arr)
             setIsLoading(false)
         })
-        window.scroll(0,0)
+        window.scroll(0, 0)
     }, [categoryId, sortType, searchValue, currentPage])
 
     const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item}/>)
@@ -58,7 +56,7 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
         <div className="container">
             <div className="content__top">
                 <Categories value={categoryId} onClickCategory={onClickCategory}/>
-                <Sort sortValue={sortType} onClickSort={onClickSort}/>
+                <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">

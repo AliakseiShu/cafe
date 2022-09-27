@@ -18,6 +18,7 @@ export type ItemsType = {
     category: number;
     rating: number;
 }
+
 type ContextTypes = {
     searchValue: string
     setSearchValue: (searchValue:string) => void
