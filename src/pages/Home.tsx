@@ -7,8 +7,8 @@ import {ItemsType} from "../App";
 import {Pagination} from "../components/Pagination/Pagination";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
-import {setCategoryId} from "../redux/slices/filerSlice";
-import axios, {AxiosError} from "axios";
+import {setCategoryId, setCurrenPage} from "../redux/slices/filerSlice";
+import {AxiosError} from "axios";
 import {pizzasApi} from "../api/pizzasApi";
 
 export type SortTypeProps = {
@@ -17,20 +17,23 @@ export type SortTypeProps = {
 }
 export type HomeType = {
     searchValue: string
-    setSearchValue: (searchValue: string) => void
 }
 
-export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
+export const Home: FC<HomeType> = ({searchValue}) => {
     const [items, setItems] = useState<ItemsType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
 
     const categoryId = useSelector((state: RootState) => state.filter.categoryId)
     const sortType = useSelector((state: RootState) => state.filter.sort.sortProperty)
+    const currentPage = useSelector((state: RootState) => state.filter.pageCount)
     const dispatch = useDispatch()
 
     const onClickCategory = (index: number) => {
         dispatch(setCategoryId(index))
+    }
+
+    const onChangePage = (page: number) => {
+       dispatch(setCurrenPage(page))
     }
 
     const sortBy = sortType.replace('-', '')
@@ -65,7 +68,7 @@ export const Home: FC<HomeType> = ({searchValue, setSearchValue}) => {
             <div className="content__items">
                 {isLoading ? skeletons : pizzas}
             </div>
-            <Pagination onChangePage={(number) => setCurrentPage(number)}/>
+            <Pagination currentPage={currentPage} onChangePage={onChangePage}/>
         </div>
     );
 };

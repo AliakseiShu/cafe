@@ -3,11 +3,13 @@ import {SortTypeProps} from "../../pages/Home";
 
 type initialState = {
     categoryId: number
+    pageCount: number
     sort: SortTypeProps
 }
 
 const initialState: initialState = {
     categoryId: 0,
+    pageCount: 1,
     sort: {
         name: 'популярности',
         sortProperty: 'rating'
@@ -23,10 +25,13 @@ export const filterSlice = createSlice({
         },
         setSort: (state, action: PayloadAction<SortTypeProps>) => {
             state.sort = action.payload
+        },
+        setCurrenPage: (state, action: PayloadAction<number>) => {
+            state.pageCount = action.payload
         }
     }
 })
 
-export const {setCategoryId, setSort} = filterSlice.actions
+export const {setCategoryId, setSort, setCurrenPage} = filterSlice.actions
 export default filterSlice.reducer
 

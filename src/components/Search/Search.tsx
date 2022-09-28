@@ -1,24 +1,32 @@
-import React, {ChangeEvent, FC, useContext, useRef} from 'react';
+import React, {ChangeEvent, FC, useCallback, useContext, useRef, useState} from 'react';
 import styles from './Search.module.scss';
 import searchSVG from '../../assets/img/search_icon.svg'
 import closeSVG from '../../assets/img/close_icon.svg'
 import {SearchContext} from "../../App";
+import {debounce} from "lodash";
 
 export const Search = () => {
 
-    const {searchValue, setSearchValue} = useContext(SearchContext)
+    const [value, setValue] = useState('');
+    const { setSearchValue } = useContext(SearchContext)
     const inputRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
 
+    const updateSearchValue = useCallback(
+        debounce((str:string) => {
+            if (setSearchValue) {
+                setSearchValue(str)
+            }
+        }, 250), [])
 
     const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
-        if (setSearchValue) {
-            setSearchValue(e.currentTarget.value)
-        }
+        setValue(e.currentTarget.value)
+        updateSearchValue(e.currentTarget.value)
     }
 
     const onClickClear = () => {
         if (setSearchValue) {
             setSearchValue('')
+            setValue('')
         }
         inputRef.current.focus()
     }
@@ -28,11 +36,11 @@ export const Search = () => {
             <img className={styles.icon} src={searchSVG} alt="Search"/>
             <input
                 ref={inputRef}
-                value={searchValue}
+                value={value}
                 onChange={onChangeSearchValue}
                 className={styles.input}
                 placeholder="Поиск пиццы ..."/>
-            {searchValue &&
+            {value &&
                 <img onClick={onClickClear}
                      className={styles.clearIcon}
                      src={closeSVG} alt="Close"/>}
