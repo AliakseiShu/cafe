@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {setSort} from "../redux/slices/filerSlice";
 
-const list = [
+export const list = [
     {name: 'популярности (DESC)', sortProperty: 'rating'},
     {name: 'популярности (ASK)', sortProperty: '-rating'},
     {name: 'цене (DESC)', sortProperty: 'price'},
