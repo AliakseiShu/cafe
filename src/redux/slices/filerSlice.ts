@@ -29,10 +29,10 @@ export const filterSlice = createSlice({
         setCurrenPage: (state, action: PayloadAction<number>) => {
             state.pageCount = action.payload
         },
-        setFilters: (state, action: PayloadAction<InitialStateType>) => {
+        setFilters: (state, action: PayloadAction<{categoryId: string, currentPage: string, sort: string}>) => {
             state.categoryId = Number(action.payload.categoryId)
-            state.pageCount = Number(action.payload.pageCount)
-            state.sort = action.payload.sort
+            state.pageCount = Number(action.payload.currentPage)
+            state.sort.sortProperty = action.payload.sort
         },
     }
 })

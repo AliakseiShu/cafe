@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Categories} from "../components/Categories";
-import {list, Sort} from "../components/Sort";
+import {Sort} from "../components/Sort";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {ItemsType} from "../App";
@@ -10,8 +10,7 @@ import {RootState} from "../redux/store";
 import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filerSlice";
 import {AxiosError} from "axios";
 import {pizzasApi} from "../api/pizzasApi";
-import qs from 'qs';
-import {useLocation, useNavigate} from "react-router-dom";
+import {useSearchParams} from "../hooks/useSearchParamsHook";
 
 export type SortTypeProps = {
     name: string
@@ -26,13 +25,16 @@ export const Home: FC<HomeType> = ({searchValue}) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const categoryId = useSelector((state: RootState) => state.filter.categoryId)
-    const sortType = useSelector((state: RootState) => state.filter.sort.sortProperty)
+    const sortProperty = useSelector((state: RootState) => state.filter.sort.sortProperty)
     const currentPage = useSelector((state: RootState) => state.filter.pageCount)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const location = useLocation();
-    console.log(location)
 
+    const dispatch = useDispatch()
+
+    const {
+        sortProperty: sortPropertyParams,
+        categoryId: categoryId1Params,
+        currentPage: currentPageParams
+    } = useSearchParams("sortProperty", "categoryId", "currentPage")
 
     const onClickCategory = (index: number) => {
         dispatch(setCategoryId(index))
@@ -42,28 +44,16 @@ export const Home: FC<HomeType> = ({searchValue}) => {
         dispatch(setCurrenPage(page))
     }
 
-    const sortBy = sortType.replace('-', '')
-    const order = sortType.includes('-') ? 'asc' : 'desc'
+    const sortBy = sortProperty.replace('-', '')
+    const order = sortProperty.includes('-') ? 'asc' : 'desc'
     const category = categoryId > 0 ? `category=${categoryId}` : ''
     const search = searchValue ? `&search=${searchValue}` : ''
 
-    type ParamsType = {
-        categoryId: string
-        currentPage: string
-        sortType: string
-    }
-
     useEffect(() => {
-        if (window.location.search) {
-            const params = qs.parse(window.location.search.substring(1))
-            console.log(params)
-           // const sort = list.find((obj) => obj.sortProperty === params.sortType)
-           // console.log(sort)
-
-          /*  dispatch(setFilters({categoryId: +params.categoryId!, pageCount: params.}))*/
+        if (sortPropertyParams && categoryId1Params && currentPageParams) {
+            dispatch(setFilters({categoryId: categoryId1Params, currentPage: currentPageParams, sort: sortPropertyParams}))
         }
     }, []);
-
 
     useEffect(() => {
         setIsLoading(true)
@@ -77,17 +67,7 @@ export const Home: FC<HomeType> = ({searchValue}) => {
             })
 
         window.scroll(0, 0)
-    }, [categoryId, sortType, searchValue, currentPage])
-
-    useEffect(() => {
-        const queryString = qs.stringify({
-            sortType,
-            categoryId,
-            currentPage
-        })
-        navigate(`?${queryString}`)
-    }, [categoryId, sortType, currentPage])
-
+    }, [categoryId, sortProperty, searchValue, currentPage])
 
     const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item}/>)
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)

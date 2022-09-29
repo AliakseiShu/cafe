@@ -8,7 +8,8 @@ const instance = axios.create({
 //api
 export const pizzasApi = {
     getPizzas(currentPage: number, category: string, sortBy: string, order: string, search: string) {
-        const promise = instance.get<ItemsType[]>(`https://632c1cb15568d3cad87cfbac.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
+        const promise = instance.get<ItemsType[]>
+        (`https://632c1cb15568d3cad87cfbac.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
         return promise
     }
 }
