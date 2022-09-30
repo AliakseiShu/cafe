@@ -3,6 +3,8 @@ import {SortTypeProps} from "../pages/Home";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {setSort} from "../redux/slices/filerSlice";
+import {Simulate} from "react-dom/test-utils";
+import click = Simulate.click;
 
 export const list = [
     {name: 'популярности (DESC)', sortProperty: 'rating'},
@@ -27,13 +29,15 @@ export const Sort = () => {
     }
 
     useEffect(() => {
-        document.body.addEventListener('click', (event: any) => {
+        const handelClickBody = (event: any) => {
             const click = event.composedPath().includes(sortRef.current)
-             if (!click) {
-                 setOpen(false)
-             }
-        })
-    }, []);
+            if (!click) {
+                setOpen(false)
+            }
+        }
+        document.body.addEventListener('click', handelClickBody)
+        return () => document.body.removeEventListener('click', handelClickBody)
+          }, []);
 
     return (
         <div ref={sortRef} className="sort">
