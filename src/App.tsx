@@ -15,8 +15,8 @@ export type ItemsType = {
     types: number[];
     sizes: number[];
     price: number;
-    category: number;
-    rating: number;
+    category?: number;
+    rating?: number;
 }
 
 type ContextTypes = {

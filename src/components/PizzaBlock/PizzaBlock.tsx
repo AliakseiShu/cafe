@@ -1,6 +1,10 @@
 import React, {FC, useState} from "react";
+import {useDispatch} from "react-redux";
+import {addItem} from "../../redux/slices/cartSlice";
+import {ItemsType} from "../../App";
 
 type PizzaBlockType = {
+    id: number
     title: string
     price: number
     imageUrl: string
@@ -8,11 +12,25 @@ type PizzaBlockType = {
     types: number []
 }
 
-export const PizzaBlock: FC<PizzaBlockType> = ({title, price, imageUrl, sizes, types}) => {
+export const PizzaBlock: FC<PizzaBlockType> = ({id, title, price, imageUrl, sizes, types}) => {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
     const typeNames = ['тонкое', 'традиционное']
+
+    const dispatch = useDispatch()
+
+    const ocCliCkAddItem = () => {
+        const item = {
+            id,
+            title,
+            price,
+            imageUrl,
+            types: [activeType],
+            sizes: [activeSize],
+        }
+        dispatch(addItem(item))
+    }
 
     return (
         <div className="pizza-block-wrapper">
@@ -38,7 +56,7 @@ export const PizzaBlock: FC<PizzaBlockType> = ({title, price, imageUrl, sizes, t
                 </div>
                 <div className="pizza-block__bottom">
                     <div className="pizza-block__price">от {price} ₽</div>
-                    <button className="button button--outline button--add">
+                    <button onClick={ocCliCkAddItem} className="button button--outline button--add">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path

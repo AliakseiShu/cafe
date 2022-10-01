@@ -1,4 +1,4 @@
-import React, {FC, RefObject, useEffect, useRef, useState} from "react";
+import React, {EventHandler, FC, RefObject, useEffect, useRef, useState} from "react";
 import {SortTypeProps} from "../pages/Home";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
@@ -21,7 +21,8 @@ export const Sort = () => {
     const sort = useSelector((state: RootState) => state.filter.sort)
     const dispatch = useDispatch()
 
-    const sortRef = useRef<HTMLDivElement | null>(null)
+    const sortRef = useRef<HTMLDivElement>(null)
+    console.log(sortRef)
 
     const onClickListItem = (sortProperty: SortTypeProps) => {
         dispatch(setSort(sortProperty))
