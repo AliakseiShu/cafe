@@ -1,14 +1,14 @@
 import React from "react";
-
-import logoSVG from '../assets/img/pizza-logo.svg'
 import {NavLink} from "react-router-dom";
+
+import {RootState} from "../redux/store";
 import {Search} from "./Search/Search";
 import {useSelector} from "react-redux";
-import {RootState} from "../redux/store";
+import logoSVG from '../assets/img/pizza-logo.svg'
 
 export const Header = () => {
-    const totalPrice = useSelector((state:RootState) => state.cart.totalPrice)
-    const items = useSelector((state:RootState) => state.cart.items)
+    const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
+    const items = useSelector((state: RootState) => state.cart.items)
 
     const totalCount = items.reduce((sum, item) => item.count + sum, 0)
 
