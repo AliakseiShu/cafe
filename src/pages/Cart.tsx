@@ -3,12 +3,14 @@ import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {CartItem} from "../components/CartItem";
-import {clearItem, removeItem} from "../redux/slices/cartSlice";
+import {clearItem} from "../redux/slices/cartSlice";
 
 export const Cart = () => {
 
     const dispatch = useDispatch()
     const items = useSelector((state: RootState) => state.cart.items)
+    const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
+    const totalCounter = items.reduce((sum, item) => sum + item.count, 0)
 
     const onClickClear = () => {
         if (window.confirm('Очистить корзину?')) {
@@ -56,7 +58,7 @@ export const Cart = () => {
                 </div>
                 <div className="cart__bottom">
                     <div className="cart__bottom-details">
-                        <span> Всего пицц: <b>1 шт.</b> </span><span> Сумма заказа: <b>395 ₽</b> </span>
+                        <span> Всего пицц: <b>{totalCounter} шт.</b> </span><span> Сумма заказа: <b>{totalPrice} ₽</b> </span>
                     </div>
                     <div className="cart__bottom-buttons">
                         <NavLink to={"/"} className="button button--outline button--add go-back-btn"
