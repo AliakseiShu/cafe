@@ -1,7 +1,14 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../redux/store";
+import {CartItem} from "../components/CartItem";
 
 export const Cart = () => {
+
+    const dispatch = useDispatch()
+    const items = useSelector((state: RootState) => state.cart.items)
+
     return (
         <div className="container">
             <div className="cart">
@@ -38,11 +45,14 @@ export const Cart = () => {
                         <span>Очистить корзину</span></div>
                 </div>
                 <div className="content__items">
-                    <div className="cart__item">
-                        <div className="cart__item-img"><img className="pizza-block__image"
-                                                             src="https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/ec29465e-606b-4a04-a03e-da3940d37e0e.jpg"
-                                                             alt="Pizza"/></div>
-                        <div className="cart__item-info"><h3>Четыре сезона</h3><p>тонкое, 26 см.</p></div>
+                    <CartItem/>
+            {/*        <div className="cart__item">
+                        <div className="cart__item-img">
+                            <img className="pizza-block__image"
+                                 src="https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/ec29465e-606b-4a04-a03e-da3940d37e0e.jpg"
+                                 alt="Pizza"/></div>
+                        <div className="cart__item-info">
+                            <h3>Четыре сезона</h3><p>тонкое, 26 см.</p></div>
                         <div className="cart__item-count">
                             <button
                                 className="button button--outline button--circle cart__item-count-minus">
@@ -83,7 +93,7 @@ export const Cart = () => {
                                 </svg>
                             </div>
                         </div>
-                    </div>
+                    </div>*/}
                 </div>
                 <div className="cart__bottom">
                     <div className="cart__bottom-details">
@@ -91,7 +101,7 @@ export const Cart = () => {
                     </div>
                     <div className="cart__bottom-buttons">
                         <NavLink to={"/"} className="button button--outline button--add go-back-btn"
-                           >
+                        >
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" stroke-width="1.5"
