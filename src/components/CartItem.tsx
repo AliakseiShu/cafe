@@ -24,7 +24,9 @@ export const CartItem: FC<ItemsTypeCart> = ({id, title, price, type, size, count
     }
 
     const onClickRemove = () => {
-        dispatch(removeItem({id}))
+        if (window.confirm('Ты действительно хочешь удалить товар?')) {
+            dispatch(removeItem({id}))
+        }
     }
 
     return (
