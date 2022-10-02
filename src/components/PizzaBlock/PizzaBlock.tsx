@@ -1,6 +1,7 @@
 import React, {FC, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addItem, ItemsTypeCart} from "../../redux/slices/cartSlice";
+import {RootState} from "../../redux/store";
 
 type PizzaBlockType = {
     id: number
@@ -15,18 +16,23 @@ export const PizzaBlock: FC<PizzaBlockType> = ({id, title, price, imageUrl, size
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
+    const cartItem = useSelector((state: RootState) => state.cart.items.find((obj: ItemsTypeCart) => obj.id === id))
+
+    const addedCount = cartItem ? cartItem.count : 0
+
     const typeNames = ['тонкое', 'традиционное']
 
     const dispatch = useDispatch()
 
     const ocCliCkAddItem = () => {
-        const item:ItemsTypeCart = {
+        const item: ItemsTypeCart = {
             id,
             title,
             price,
             imageUrl,
-            type: activeType,
+            type: typeNames[activeType],
             size: activeSize,
+            count: 0
         }
         dispatch(addItem(item))
     }
@@ -63,7 +69,8 @@ export const PizzaBlock: FC<PizzaBlockType> = ({id, title, price, imageUrl, size
                                 fill="white"></path>
                         </svg>
                         <span>Добавить</span>
-                        <i>0</i>
+                        {addedCount > 0 &&
+                        <i>{addedCount}</i>}
                     </button>
                 </div>
             </div>
