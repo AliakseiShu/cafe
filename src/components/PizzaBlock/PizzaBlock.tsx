@@ -31,7 +31,7 @@ export const PizzaBlock: FC<PizzaBlockType> = ({id, title, price, imageUrl, size
             price,
             imageUrl,
             type: typeNames[activeType],
-            size: activeSize,
+            size: sizes[activeSize],
             count: 0
         }
         dispatch(addItem(item))

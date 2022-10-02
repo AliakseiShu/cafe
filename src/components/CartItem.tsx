@@ -37,7 +37,7 @@ export const CartItem: FC<ItemsTypeCart> = ({id, title, price, type, size, count
                      alt="Pizza"/></div>
             <div className="cart__item-info">
                 <h3>{title}</h3>
-                <p>{type}, 26 см.</p></div>
+                <p>{type}, {size} см.</p></div>
             <div className="cart__item-count">
                 <button onClick={onClickMinus}
                         className="button button--outline button--circle cart__item-count-minus">

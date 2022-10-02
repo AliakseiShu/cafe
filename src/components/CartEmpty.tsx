@@ -1,4 +1,6 @@
 import React from 'react';
+import cartEmptyImg from "../assets/img/empty-cart.png";
+import {NavLink} from "react-router-dom";
 
 export const CartEmpty = () => {
     return (
@@ -9,9 +11,9 @@ export const CartEmpty = () => {
                 </h2>
                 <p>Вероятней всего, вы не заказывали ещё пиццу.<br/>Для того, чтобы заказать пиццу, перейди на главную
                     страницу.</p>
-                <img src="/static/media/empty-cart.db905d1f4b063162f25b.png" alt="Empty cart"/>
-                <a className="button button--black" href="/">
-                    <span>Вернуться назад</span></a>
+                <img src={cartEmptyImg} alt="Empty cart"/>
+                <NavLink className="button button--black" to="/">
+                    <span>Вернуться назад</span></NavLink>
             </div>
         </>
     );

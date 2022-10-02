@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {CartItem} from "../components/CartItem";
 import {clearItem} from "../redux/slices/cartSlice";
+import {CartEmpty} from "../components/CartEmpty";
 
 export const Cart = () => {
 
@@ -19,6 +20,7 @@ export const Cart = () => {
     }
 
     return (
+        <> {totalPrice ?
         <div className="container">
             <div className="cart">
                 <div className="cart__top">
@@ -76,6 +78,8 @@ export const Cart = () => {
                 </div>
             </div>
         </div>
+        : <CartEmpty/>}
+        </>
     );
 };
 
