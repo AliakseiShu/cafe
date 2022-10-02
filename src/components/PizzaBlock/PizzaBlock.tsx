@@ -1,7 +1,6 @@
 import React, {FC, useState} from "react";
 import {useDispatch} from "react-redux";
-import {addItem} from "../../redux/slices/cartSlice";
-import {ItemsType} from "../../App";
+import {addItem, ItemsTypeCart} from "../../redux/slices/cartSlice";
 
 type PizzaBlockType = {
     id: number
@@ -21,13 +20,13 @@ export const PizzaBlock: FC<PizzaBlockType> = ({id, title, price, imageUrl, size
     const dispatch = useDispatch()
 
     const ocCliCkAddItem = () => {
-        const item = {
+        const item:ItemsTypeCart = {
             id,
             title,
             price,
             imageUrl,
-            types: [activeType],
-            sizes: [activeSize],
+            type: activeType,
+            size: activeSize,
         }
         dispatch(addItem(item))
     }

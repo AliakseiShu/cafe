@@ -1,9 +1,17 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ItemsType} from "../../App";
+
+export type ItemsTypeCart = {
+    id: number
+    title: string
+    price: number
+    imageUrl: string
+    size: number
+    type: number
+}
 
 type InitialStateType = {
     totalPrice: number
-    items: ItemsType[]
+    items: ItemsTypeCart[]
 }
 
 const initialState: InitialStateType = {
@@ -15,10 +23,10 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addItem: (state, action: PayloadAction<ItemsType>) => {
+        addItem: (state, action: PayloadAction<ItemsTypeCart>) => {
             state.items.push(action.payload)
         },
-        removeItem: (state, action: PayloadAction<ItemsType>) => {
+        removeItem: (state, action: PayloadAction<ItemsTypeCart>) => {
             state.items.filter((obj) => obj.id !== action.payload.id)
         },
         clearItem: (state) => {

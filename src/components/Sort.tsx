@@ -22,7 +22,6 @@ export const Sort = () => {
     const dispatch = useDispatch()
 
     const sortRef = useRef<HTMLDivElement>(null)
-    console.log(sortRef)
 
     const onClickListItem = (sortProperty: SortTypeProps) => {
         dispatch(setSort(sortProperty))
