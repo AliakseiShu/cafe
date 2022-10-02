@@ -10,6 +10,8 @@ export const Header = () => {
     const totalPrice = useSelector((state:RootState) => state.cart.totalPrice)
     const items = useSelector((state:RootState) => state.cart.items)
 
+    const totalCount = items.reduce((sum, item) => item.count + sum, 0)
+
     return (
         <div className="header">
             <div className="container">
@@ -44,7 +46,7 @@ export const Header = () => {
                                 stroke="white" strokeWidth="1.8" strokeLinecap="round"
                                 strokeLinejoin="round"></path>
                         </svg>
-                        <span>{items.length}</span>
+                        <span>{totalCount}</span>
                     </NavLink>
                 </div>
             </div>

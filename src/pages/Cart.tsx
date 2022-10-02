@@ -45,7 +45,7 @@ export const Cart = () => {
                         <span>Очистить корзину</span></div>
                 </div>
                 <div className="content__items">
-                    <CartItem/>
+                    {items.map((item) => <CartItem key={item.id} {...item}/>)}
             {/*        <div className="cart__item">
                         <div className="cart__item-img">
                             <img className="pizza-block__image"
