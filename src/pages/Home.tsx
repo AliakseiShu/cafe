@@ -60,43 +60,16 @@ export const Home: FC<HomeType> = ({searchValue}) => {
         }
     }, []);
 
-    /*    useEffect(() => {
-            setIsLoading(true)
-            pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
-                .then((res) => {
-                    setItems(res.data)
-                    setIsLoading(false)
-                    console.log(1111)
-                })
-                .catch((e) => {
-                    const error = e as AxiosError
-                })
-            console.log(2222)
-
-            window.scroll(0, 0)
-        }, [categoryId, sortProperty, searchValue, currentPage])*/
-
     const fetchPizzas = async () => {
-        setIsLoading(true)
-        /*       await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
-                    .then((res) => {
-                        setItems(res.data)
-                        setIsLoading(false)
-                    })
-
-                    .catch((e) => {
-                        const error = e as AxiosError
-                    })*/
         try {
             const res = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
             setItems(res.data)
             setIsLoading(false)
         } catch (e) {
-            const error = e as AxiosError
+            setIsLoading(false)
         }
         window.scroll(0, 0)
     }
-
 
     useEffect(() => {
         fetchPizzas()
