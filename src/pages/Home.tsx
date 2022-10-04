@@ -64,8 +64,9 @@ export const Home: FC<HomeType> = ({searchValue}) => {
         try {
             const res = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
             setItems(res.data)
-            setIsLoading(false)
-        } catch (e) {
+        } catch (error) {
+            console.log((error as Error).message)
+        } finally {
             setIsLoading(false)
         }
         window.scroll(0, 0)
