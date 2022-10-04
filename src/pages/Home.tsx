@@ -11,6 +11,7 @@ import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filerSli
 import {AxiosError} from "axios";
 import {pizzasApi} from "../api/pizzasApi";
 import {useSearchParams} from "../hooks/useSearchParamsHook";
+import {log} from "util";
 
 export type SortTypeProps = {
     name: string
@@ -51,23 +52,56 @@ export const Home: FC<HomeType> = ({searchValue}) => {
 
     useEffect(() => {
         if (sortPropertyParams && categoryId1Params && currentPageParams) {
-            dispatch(setFilters({categoryId: categoryId1Params, currentPage: currentPageParams, sort: sortPropertyParams}))
+            dispatch(setFilters({
+                categoryId: categoryId1Params,
+                currentPage: currentPageParams,
+                sort: sortPropertyParams
+            }))
         }
     }, []);
 
-    useEffect(() => {
-        setIsLoading(true)
-        pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
-            .then((res) => {
-                setItems(res.data)
-                setIsLoading(false)
-            })
-            .catch((e) => {
-                const error = e as AxiosError
-            })
+    /*    useEffect(() => {
+            setIsLoading(true)
+            pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
+                .then((res) => {
+                    setItems(res.data)
+                    setIsLoading(false)
+                    console.log(1111)
+                })
+                .catch((e) => {
+                    const error = e as AxiosError
+                })
+            console.log(2222)
 
+            window.scroll(0, 0)
+        }, [categoryId, sortProperty, searchValue, currentPage])*/
+
+    const fetchPizzas = async () => {
+        setIsLoading(true)
+        /*       await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
+                    .then((res) => {
+                        setItems(res.data)
+                        setIsLoading(false)
+                    })
+
+                    .catch((e) => {
+                        const error = e as AxiosError
+                    })*/
+        try {
+            const res = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
+            setItems(res.data)
+            setIsLoading(false)
+        } catch (e) {
+            const error = e as AxiosError
+        }
         window.scroll(0, 0)
-    }, [categoryId, sortProperty, searchValue, currentPage])
+    }
+
+
+    useEffect(() => {
+        fetchPizzas()
+    }, [categoryId, sortProperty, searchValue, currentPage]);
+
 
     const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item}/>)
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)

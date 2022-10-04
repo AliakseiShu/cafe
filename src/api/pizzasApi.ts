@@ -7,8 +7,8 @@ const instance = axios.create({
 
 //api
 export const pizzasApi = {
-   async getPizzas(currentPage: number, category: string, sortBy: string, order: string, search: string) {
-         const promise = await instance.get<ItemsType[]>
+    getPizzas(currentPage: number, category: string, sortBy: string, order: string, search: string) {
+         const promise = instance.get<ItemsType[]>
         (`items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
         return promise
     }

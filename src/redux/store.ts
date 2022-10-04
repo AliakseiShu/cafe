@@ -11,7 +11,3 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-
-const numStr = '123a'
-const result = +numStr === parseInt(numStr)
-console.log(result)
