@@ -3,15 +3,13 @@ import {Categories} from "../components/Categories";
 import {Sort} from "../components/Sort";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
-import {ItemsType} from "../App";
 import {Pagination} from "../components/Pagination/Pagination";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filerSlice";
-import {AxiosError} from "axios";
 import {pizzasApi} from "../api/pizzasApi";
 import {useSearchParams} from "../hooks/useSearchParamsHook";
-import {log} from "util";
+import {fetchPizzasStatus, setItems} from "../redux/slices/pizzasSlice";
 
 export type SortTypeProps = {
     name: string
@@ -22,12 +20,13 @@ export type HomeType = {
 }
 
 export const Home: FC<HomeType> = ({searchValue}) => {
-    const [items, setItems] = useState<ItemsType[]>([]);
+    //const [items, setItems] = useState<ItemsType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const categoryId = useSelector((state: RootState) => state.filter.categoryId)
     const sortProperty = useSelector((state: RootState) => state.filter.sort.sortProperty)
     const currentPage = useSelector((state: RootState) => state.filter.pageCount)
+    const items = useSelector((state: RootState) => state.pizzas.items)
 
     const dispatch = useDispatch()
 
@@ -62,8 +61,10 @@ export const Home: FC<HomeType> = ({searchValue}) => {
 
     const fetchPizzas = async () => {
         try {
-            const res = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
-            setItems(res.data)
+            /*const {data} = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
+            dispatch(setItems(data))*/
+            dispatch(fetchPizzasStatus())
+
         } catch (error) {
             console.log((error as Error).message)
         } finally {

@@ -1,36 +1,32 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {ItemsType} from "../../App";
+import {pizzasApi} from "../../api/pizzasApi";
 
-export type ItemsTypeCart = {
-    id: number
-    title: string
-    price: number
-    imageUrl: string
-    type: string
-    size: number
-    count: number
+export type ItemsTypePizzas = {
+    items: ItemsType[]
 }
 
-type InitialStateType = {
-    totalPrice: number
-    items: ItemsTypeCart[]
-
-}
-
-const initialState: InitialStateType = {
-    totalPrice: 0,
+const initialState: ItemsTypePizzas = {
     items: [],
 }
 
 export const pizzasSlice = createSlice({
-    name: 'cart',
+    name: 'pizza',
     initialState,
     reducers: {
-        addItem: (state, action: PayloadAction<ItemsTypeCart>) => {
-
+        setItems: (state, action: PayloadAction<ItemsType[]>) => {
+            state.items = action.payload
         },
     }
 })
 
-export const {addItem} = pizzasSlice.actions
+export const {setItems} = pizzasSlice.actions
 export default pizzasSlice.reducer
 
+export const fetchPizzasStatus = createAsyncThunk(
+    'pizza/fetchPizzasStatus',
+    async (userId: number, thunkAPI) => {
+        const {data} = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
+        return data
+    }
+)
