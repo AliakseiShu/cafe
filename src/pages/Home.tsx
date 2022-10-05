@@ -5,11 +5,11 @@ import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {Pagination} from "../components/Pagination/Pagination";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../redux/store";
+import {AppDispatch, RootState} from "../redux/store";
 import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filerSlice";
 import {pizzasApi} from "../api/pizzasApi";
 import {useSearchParams} from "../hooks/useSearchParamsHook";
-import {fetchPizzasStatus, setItems} from "../redux/slices/pizzasSlice";
+import {fetchPizzas, setItems} from "../redux/slices/pizzasSlice";
 
 export type SortTypeProps = {
     name: string
@@ -28,7 +28,7 @@ export const Home: FC<HomeType> = ({searchValue}) => {
     const currentPage = useSelector((state: RootState) => state.filter.pageCount)
     const items = useSelector((state: RootState) => state.pizzas.items)
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>();
 
     const {
         sortProperty: sortPropertyParams,
@@ -59,11 +59,11 @@ export const Home: FC<HomeType> = ({searchValue}) => {
         }
     }, []);
 
-    const fetchPizzas = async () => {
+    const getPizzas = async () => {
         try {
             /*const {data} = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
             dispatch(setItems(data))*/
-            dispatch(fetchPizzasStatus())
+            dispatch(fetchPizzas({currentPage, category, sortBy, order, search}))
 
         } catch (error) {
             console.log((error as Error).message)
@@ -74,7 +74,7 @@ export const Home: FC<HomeType> = ({searchValue}) => {
     }
 
     useEffect(() => {
-        fetchPizzas()
+        getPizzas()
     }, [categoryId, sortProperty, searchValue, currentPage]);
 
 
