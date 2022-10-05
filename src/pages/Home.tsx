@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {Categories} from "../components/Categories";
 import {Sort} from "../components/Sort";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
@@ -7,9 +7,8 @@ import {Pagination} from "../components/Pagination/Pagination";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../redux/store";
 import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filerSlice";
-import {pizzasApi} from "../api/pizzasApi";
 import {useSearchParams} from "../hooks/useSearchParamsHook";
-import {fetchPizzas, setItems} from "../redux/slices/pizzasSlice";
+import {fetchPizzas} from "../redux/slices/pizzasSlice";
 
 export type SortTypeProps = {
     name: string
@@ -20,7 +19,6 @@ export type HomeType = {
 }
 
 export const Home: FC<HomeType> = ({searchValue}) => {
-    // const [isLoading, setIsLoading] = useState(true);
 
     const categoryId = useSelector((state: RootState) => state.filter.categoryId)
     const sortProperty = useSelector((state: RootState) => state.filter.sort.sortProperty)

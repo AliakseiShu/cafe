@@ -9,20 +9,20 @@ type paramsType = {
     order: string,
     search: string
 }
+export type ItemsTypePizzas = {
+    items: ItemsType[]
+    status: 'loading' | 'success' | 'error'
+}
+
 
 export const fetchPizzas = createAsyncThunk(
     'pizza/fetchPizzasStatus',
-    async (params: paramsType) => {
+    async (params: paramsType, thunkAPI) => {
         const {category, sortBy, currentPage, order, search} = params
         const {data} = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
         return data
     }
 )
-
-export type ItemsTypePizzas = {
-    items: ItemsType[]
-    status: 'loading' | 'success' | 'error'
-}
 
 const initialState: ItemsTypePizzas = {
     items: [],
