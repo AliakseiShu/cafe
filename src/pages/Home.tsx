@@ -20,13 +20,13 @@ export type HomeType = {
 }
 
 export const Home: FC<HomeType> = ({searchValue}) => {
-    //const [items, setItems] = useState<ItemsType[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+   // const [isLoading, setIsLoading] = useState(true);
 
     const categoryId = useSelector((state: RootState) => state.filter.categoryId)
     const sortProperty = useSelector((state: RootState) => state.filter.sort.sortProperty)
     const currentPage = useSelector((state: RootState) => state.filter.pageCount)
     const items = useSelector((state: RootState) => state.pizzas.items)
+    const status = useSelector((state: RootState) => state.pizzas.status)
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -59,17 +59,8 @@ export const Home: FC<HomeType> = ({searchValue}) => {
         }
     }, []);
 
-    const getPizzas = async () => {
-        try {
-            /*const {data} = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
-            dispatch(setItems(data))*/
-            dispatch(fetchPizzas({currentPage, category, sortBy, order, search}))
-
-        } catch (error) {
-            console.log((error as Error).message)
-        } finally {
-            setIsLoading(false)
-        }
+    const getPizzas = () => {
+        dispatch(fetchPizzas({currentPage, category, sortBy, order, search}))
         window.scroll(0, 0)
     }
 
@@ -89,7 +80,7 @@ export const Home: FC<HomeType> = ({searchValue}) => {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {isLoading ? skeletons : pizzas}
+                {status === 'loading' ? skeletons : pizzas}
             </div>
             <Pagination currentPage={currentPage} onChangePage={onChangePage}/>
         </div>
