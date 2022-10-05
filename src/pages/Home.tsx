@@ -20,7 +20,7 @@ export type HomeType = {
 }
 
 export const Home: FC<HomeType> = ({searchValue}) => {
-   // const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
 
     const categoryId = useSelector((state: RootState) => state.filter.categoryId)
     const sortProperty = useSelector((state: RootState) => state.filter.sort.sortProperty)
@@ -79,9 +79,17 @@ export const Home: FC<HomeType> = ({searchValue}) => {
                 <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
-            <div className="content__items">
-                {status === 'loading' ? skeletons : pizzas}
-            </div>
+            {
+                status === 'error'
+                    ? <div className="content__error-info">
+                        <h2>Произошла ошибка <span>😕</span></h2>
+                        <p>К сожалению, не удалось получить пиццы</p>
+                    </div>
+                    : <div className="content__items">
+                        {status === 'loading' ? skeletons : pizzas}
+                    </div>
+            }
+
             <Pagination currentPage={currentPage} onChangePage={onChangePage}/>
         </div>
     );

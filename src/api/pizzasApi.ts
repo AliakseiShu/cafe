@@ -2,7 +2,7 @@ import axios from "axios";
 import {ItemsType} from "../App";
 
 const instance = axios.create({
-    baseURL: "https://632c1cb15568d3cad87cfbac.mockapi.io/"
+    baseURL: "https://-632c1cb15568d3cad87cfbac.mockapi.io/"
 })
 
 //api
