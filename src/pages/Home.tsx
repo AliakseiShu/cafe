@@ -5,10 +5,11 @@ import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {Pagination} from "../components/Pagination/Pagination";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../redux/store";
+import {AppDispatch, RootState, useAppDispatch, useAppSelector} from "../redux/store";
 import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filerSlice";
 import {useSearchParams} from "../hooks/useSearchParamsHook";
 import {fetchPizzas} from "../redux/slices/pizzasSlice";
+import {selectCategoryId} from "../selectors/selectors";
 
 export type SortTypeProps = {
     name: string
@@ -20,13 +21,16 @@ export type HomeType = {
 
 export const Home: FC<HomeType> = ({searchValue}) => {
 
-    const categoryId = useSelector((state: RootState) => state.filter.categoryId)
+    //const categoryId = useAppSelector(selectCategoryId)
+    //const sortProperty = useSelector(selectSortProperty)
+
+    const categoryId = useAppSelector(state => state.filter.categoryId)
     const sortProperty = useSelector((state: RootState) => state.filter.sort.sortProperty)
     const currentPage = useSelector((state: RootState) => state.filter.pageCount)
     const items = useSelector((state: RootState) => state.pizzas.items)
     const status = useSelector((state: RootState) => state.pizzas.status)
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     const {
         sortProperty: sortPropertyParams,
