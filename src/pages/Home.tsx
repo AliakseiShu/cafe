@@ -22,7 +22,6 @@ export type HomeType = {
 export const Home: FC<HomeType> = ({searchValue}) => {
 
     //const categoryId = useAppSelector(selectCategoryId)
-    //const sortProperty = useSelector(selectSortProperty)
 
     const categoryId = useAppSelector(state => state.filter.categoryId)
     const sortProperty = useSelector((state: RootState) => state.filter.sort.sortProperty)
