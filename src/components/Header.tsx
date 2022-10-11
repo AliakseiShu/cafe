@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import {Search} from "./Search/Search";
 import logoSVG from '../assets/img/pizza-logo.svg'
 
@@ -10,6 +10,8 @@ export const Header = () => {
 
     const totalPrice = useAppSelector(selectTotalPrice)
     const items = useAppSelector(selectItems)
+    //const pathname = window.location.pathname
+    const location = useLocation()
 
     const totalCount = items.reduce((sum, item) => item.count + sum, 0)
 
@@ -28,7 +30,7 @@ export const Header = () => {
                     </div>
                 </NavLink>
                 <Search/>
-                <div className="header__cart">
+                {location.pathname !== '/cart' && <div className="header__cart">
                     <NavLink to="/cart" className="button button--cart">
                         <span>{totalPrice} ₽</span>
                         <div className="button__delimiter"></div>
@@ -49,7 +51,7 @@ export const Header = () => {
                         </svg>
                         <span>{totalCount}</span>
                     </NavLink>
-                </div>
+                </div>}
             </div>
         </div>
     )
