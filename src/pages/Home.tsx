@@ -16,6 +16,7 @@ import {
 } from "../redux/slices/filerSlice";
 import {useSearchParams} from "../hooks/useSearchParamsHook";
 import {fetchPizzas, selectPizzasItems, selectStatus} from "../redux/slices/pizzasSlice";
+import {NavLink} from "react-router-dom";
 
 
 export type SortTypeProps = {
@@ -72,7 +73,7 @@ export const Home = () => {
     }, [categoryId, sortProperty, searchValue, currentPage]);
 
 
-    const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item}/>)
+    const pizzas = items.map((item) => <NavLink key={item.id} to={`/pizza/${item.id}`}><PizzaBlock {...item}/></NavLink>)
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
 
     return (

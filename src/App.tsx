@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes} from "react-router-dom";
+import {Outlet, Route, Routes} from "react-router-dom";
 
 import {Header} from "./components/Header";
 import {Home} from "./pages/Home";
@@ -7,9 +7,11 @@ import {Cart} from "./pages/Cart";
 import {Page404} from "./pages/Page404";
 
 import './scss/app.scss';
+import {FullPizza} from "./pages/FullPizza";
+import {MainLayout} from "./layouts/MainLayout";
 
 export type ItemsType = {
-    id: number;
+    id: string;
     imageUrl: string;
     title: string;
     types: number[];
@@ -20,18 +22,15 @@ export type ItemsType = {
 }
 
 export const App = () => {
-
     return (
-        <div className="wrapper">
-            <Header/>
-            <div className="content">
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/cart" element={<Cart/>}/>
-                    <Route path="*" element={<Page404/>}/>
-                </Routes>
-            </div>
-        </div>
+        <Routes>
+            <Route path="/" element={<MainLayout/>}>
+            <Route path="" element={<Home/>}/>
+            <Route path="cart" element={<Cart/>}/>
+            <Route path="pizza/:pizzaId" element={<FullPizza/>}/>
+            <Route path="*" element={<Page404/>}/>
+            </Route>
+        </Routes>
     );
 }
 

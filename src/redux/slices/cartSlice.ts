@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 
 export type ItemsTypeCart = {
-    id: number
+    id: string
     title: string
     price: number
     imageUrl: string
@@ -37,14 +37,14 @@ export const cartSlice = createSlice({
             }
             state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0)
         },
-        minusItem: (state, action: PayloadAction<{ id: number }>) => {
+        minusItem: (state, action: PayloadAction<{ id: string }>) => {
             const findItem = state.items.find((obj) => obj.id === action.payload.id)
             if (findItem) {
                 findItem.count--
             }
             state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count - sum, 0)
         },
-        removeItem: (state, action: PayloadAction<{ id: number }>) => {
+        removeItem: (state, action: PayloadAction<{ id: string }>) => {
             state.items = state.items.filter((obj) => obj.id !== action.payload.id)
         },
         clearItem: (state) => {
