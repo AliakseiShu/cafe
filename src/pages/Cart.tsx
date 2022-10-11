@@ -2,16 +2,17 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
-import {RootState} from "../redux/store";
+import {RootState, useAppSelector} from "../redux/store";
 import {CartItem} from "../components/CartItem";
 import {clearItem} from "../redux/slices/cartSlice";
 import {CartEmpty} from "../components/CartEmpty";
+import {selectItems, selectTotalPrice} from "../selectors/selectors";
 
 export const Cart = () => {
 
     const dispatch = useDispatch()
-    const items = useSelector((state: RootState) => state.cart.items)
-    const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
+    const items = useAppSelector(selectItems)
+    const totalPrice = useAppSelector(selectTotalPrice)
     const totalCounter = items.reduce((sum, item) => sum + item.count, 0)
 
     const onClickClear = () => {

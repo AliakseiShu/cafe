@@ -4,11 +4,12 @@ import {Search} from "./Search/Search";
 import {useSelector} from "react-redux";
 import logoSVG from '../assets/img/pizza-logo.svg'
 import {selectItems, selectTotalPrice} from "../selectors/selectors";
+import {useAppSelector} from "../redux/store";
 
 export const Header = () => {
 
-    const totalPrice = useSelector(selectTotalPrice)
-    const items = useSelector(selectItems)
+    const totalPrice = useAppSelector(selectTotalPrice)
+    const items = useAppSelector(selectItems)
 
     const totalCount = items.reduce((sum, item) => item.count + sum, 0)
 
