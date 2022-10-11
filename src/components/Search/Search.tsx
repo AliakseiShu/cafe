@@ -8,14 +8,13 @@ import {setSearchValue} from "../../redux/slices/filerSlice";
 
 export const Search = () => {
 
-
     const [value, setValue] = useState('');
     const inputRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
     const dispatch = useAppDispatch()
 
     const updateSearchValue = useCallback(
         debounce((str:string) => {
-            if (dispatch(setSearchValue)) {
+            if (setSearchValue) {
                 dispatch(setSearchValue(str))
             }
         }, 250), [])
@@ -27,7 +26,7 @@ export const Search = () => {
 
     const onClickClear = () => {
         if (setSearchValue){
-            dispatch(setSearchValue(value))
+            dispatch(setSearchValue(''))
             setValue('')
         }
         inputRef.current.focus()

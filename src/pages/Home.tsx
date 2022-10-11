@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Categories} from "../components/Categories";
 import {Sort} from "../components/Sort";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
@@ -6,7 +6,9 @@ import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {Pagination} from "../components/Pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../redux/store";
 import {
-    selectCategoryId, selectCurrentPage, selectSearchValue,
+    selectCategoryId,
+    selectCurrentPage,
+    selectSearchValue,
     selectSortProperty,
     setCategoryId,
     setCurrenPage,
@@ -20,10 +22,6 @@ export type SortTypeProps = {
     name: string
     sortProperty: string
 }
-/*export type HomeType = {
-    searchValue: string
-}*/
-
 export const Home = () => {
 
     const categoryId = useAppSelector(selectCategoryId)
