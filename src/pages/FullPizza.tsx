@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {ItemsType} from "../App";
 
@@ -7,14 +7,16 @@ export const FullPizza = () => {
 
     const [pizza, setPizza] = useState<ItemsType>();
     const {pizzaId} = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function fetchPizza() {
             try {
-                const {data} = await axios.get(`https://632c1cb15568d3cad87cfbac.mockapi.io/items/` + pizzaId)
+                const {data} = await axios.get(`https://-632c1cb15568d3cad87cfbac.mockapi.io/items/` + pizzaId)
                 setPizza(data)
             } catch (error) {
                 alert('Ошибка при получении пиццы')
+                navigate('/')
             }
         }
         fetchPizza()
