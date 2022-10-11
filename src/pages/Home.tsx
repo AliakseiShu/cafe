@@ -4,18 +4,17 @@ import {Sort} from "../components/Sort";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {Pagination} from "../components/Pagination/Pagination";
-import {useSelector} from "react-redux";
-import {RootState, useAppDispatch, useAppSelector} from "../redux/store";
-import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filerSlice";
-import {useSearchParams} from "../hooks/useSearchParamsHook";
-import {fetchPizzas} from "../redux/slices/pizzasSlice";
+import {useAppDispatch, useAppSelector} from "../redux/store";
 import {
-    selectCategoryId,
-    selectCurrentPage,
-    selectPizzasItems,
+    selectCategoryId, selectCurrentPage,
     selectSortProperty,
-    selectStatus
-} from "../selectors/selectors";
+    setCategoryId,
+    setCurrenPage,
+    setFilters
+} from "../redux/slices/filerSlice";
+import {useSearchParams} from "../hooks/useSearchParamsHook";
+import {fetchPizzas, selectPizzasItems, selectStatus} from "../redux/slices/pizzasSlice";
+
 
 export type SortTypeProps = {
     name: string

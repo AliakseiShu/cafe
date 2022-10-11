@@ -1,10 +1,10 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {Search} from "./Search/Search";
-import {useSelector} from "react-redux";
 import logoSVG from '../assets/img/pizza-logo.svg'
-import {selectItems, selectTotalPrice} from "../selectors/selectors";
+
 import {useAppSelector} from "../redux/store";
+import {selectItems, selectTotalPrice} from "../redux/slices/cartSlice";
 
 export const Header = () => {
 

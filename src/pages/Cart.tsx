@@ -1,12 +1,11 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 
-import {RootState, useAppSelector} from "../redux/store";
+import {useAppSelector} from "../redux/store";
 import {CartItem} from "../components/CartItem";
-import {clearItem} from "../redux/slices/cartSlice";
+import {clearItem, selectItems, selectTotalPrice} from "../redux/slices/cartSlice";
 import {CartEmpty} from "../components/CartEmpty";
-import {selectItems, selectTotalPrice} from "../selectors/selectors";
 
 export const Cart = () => {
 
