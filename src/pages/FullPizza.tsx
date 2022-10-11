@@ -12,21 +12,28 @@ export const FullPizza = () => {
     useEffect(() => {
         async function fetchPizza() {
             try {
-                const {data} = await axios.get(`https://-632c1cb15568d3cad87cfbac.mockapi.io/items/` + pizzaId)
+                const {data} = await axios.get(`https://632c1cb15568d3cad87cfbac.mockapi.io/items/` + pizzaId)
                 setPizza(data)
             } catch (error) {
                 alert('Ошибка при получении пиццы')
                 navigate('/')
             }
         }
+
         fetchPizza()
     }, [])
 
+    if (!pizza) {
+        return (
+            <div>Loading...</div>
+        )
+    }
+
     return (
         <div className="container">
-            <img src={pizza?.imageUrl}/>
-            <h2>{pizza?.title}</h2>
-            <h4>{pizza?.price} ₽</h4>
+            <img src={pizza.imageUrl}/>
+            <h2>{pizza.title}</h2>
+            <h4>{pizza.price} ₽</h4>
         </div>
     );
 };
