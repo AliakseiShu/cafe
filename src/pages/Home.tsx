@@ -6,7 +6,7 @@ import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {Pagination} from "../components/Pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../redux/store";
 import {
-    selectCategoryId, selectCurrentPage,
+    selectCategoryId, selectCurrentPage, selectSearchValue,
     selectSortProperty,
     setCategoryId,
     setCurrenPage,
@@ -20,17 +20,18 @@ export type SortTypeProps = {
     name: string
     sortProperty: string
 }
-export type HomeType = {
+/*export type HomeType = {
     searchValue: string
-}
+}*/
 
-export const Home: FC<HomeType> = ({searchValue}) => {
+export const Home = () => {
 
     const categoryId = useAppSelector(selectCategoryId)
     const sortProperty = useAppSelector(selectSortProperty)
     const currentPage = useAppSelector(selectCurrentPage)
     const items = useAppSelector(selectPizzasItems)
     const status = useAppSelector(selectStatus)
+    const searchValue = useAppSelector(selectSearchValue)
 
     const dispatch = useAppDispatch();
 

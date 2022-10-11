@@ -1,20 +1,22 @@
-import React, {ChangeEvent, FC, useCallback, useContext, useRef, useState} from 'react';
+import React, {ChangeEvent, useCallback, useState} from 'react';
 import styles from './Search.module.scss';
 import searchSVG from '../../assets/img/search_icon.svg'
 import closeSVG from '../../assets/img/close_icon.svg'
-import {SearchContext} from "../../App";
 import {debounce} from "lodash";
+import {useAppDispatch} from "../../redux/store";
+import {setSearchValue} from "../../redux/slices/filerSlice";
 
 export const Search = () => {
 
+
     const [value, setValue] = useState('');
-    const { setSearchValue } = useContext(SearchContext)
     const inputRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+    const dispatch = useAppDispatch()
 
     const updateSearchValue = useCallback(
         debounce((str:string) => {
-            if (setSearchValue) {
-                setSearchValue(str)
+            if (dispatch(setSearchValue)) {
+                dispatch(setSearchValue(str))
             }
         }, 250), [])
 
@@ -24,8 +26,8 @@ export const Search = () => {
     }
 
     const onClickClear = () => {
-        if (setSearchValue) {
-            setSearchValue('')
+        if (setSearchValue){
+            dispatch(setSearchValue(value))
             setValue('')
         }
         inputRef.current.focus()

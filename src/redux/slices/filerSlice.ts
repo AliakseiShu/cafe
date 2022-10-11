@@ -3,12 +3,14 @@ import {SortTypeProps} from "../../pages/Home";
 import {RootState} from "../store";
 
 type InitialStateType = {
+    searchValue: string
     categoryId: number
     pageCount: number
     sort: SortTypeProps
 }
 
 const initialState: InitialStateType = {
+    searchValue: '',
     categoryId: 0,
     pageCount: 1,
     sort: {
@@ -23,6 +25,9 @@ export const filterSlice = createSlice({
     reducers: {
         setCategoryId: (state, action: PayloadAction<number>) => {
             state.categoryId = action.payload
+        },
+        setSearchValue: (state, action: PayloadAction<string>) => {
+            state.searchValue = action.payload
         },
         setSort: (state, action: PayloadAction<SortTypeProps>) => {
             state.sort = action.payload
@@ -41,7 +46,8 @@ export const filterSlice = createSlice({
 export const selectCategoryId = (state: RootState) => state.filter.categoryId
 export const selectSortProperty = (state: RootState) => state.filter.sort.sortProperty
 export const selectCurrentPage = (state: RootState) => state.filter.pageCount
+export const selectSearchValue = (state: RootState) => state.filter.searchValue
 
-export const {setCategoryId, setSort, setCurrenPage, setFilters} = filterSlice.actions
+export const {setCategoryId, setSort, setCurrenPage, setFilters, setSearchValue} = filterSlice.actions
 export default filterSlice.reducer
 
