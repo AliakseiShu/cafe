@@ -1,7 +1,5 @@
 import React from 'react';
-import {Outlet, Route, Routes} from "react-router-dom";
-
-import {Header} from "./components/Header";
+import {Route, Routes} from "react-router-dom";
 import {Home} from "./pages/Home";
 import {Cart} from "./pages/Cart";
 import {Page404} from "./pages/Page404";
@@ -24,11 +22,11 @@ export type ItemsType = {
 export const App = () => {
     return (
         <Routes>
-            <Route path="/" element={<MainLayout/>}>
-            <Route path="" element={<Home/>}/>
-            <Route path="cart" element={<Cart/>}/>
-            <Route path="pizza/:pizzaId" element={<FullPizza/>}/>
-            <Route path="*" element={<Page404/>}/>
+            <Route path="/" element={<MainLayout />}>
+            <Route path="" element={<Home />}/>
+            <Route path="cart" element={<Cart />}/>
+            <Route path="pizza/:pizzaId" element={<FullPizza />}/>
+            <Route path="*" element={<Page404 />}/>
             </Route>
         </Routes>
     );

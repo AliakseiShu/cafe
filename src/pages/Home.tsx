@@ -73,7 +73,10 @@ export const Home = () => {
     }, [categoryId, sortProperty, searchValue, currentPage]);
 
 
-    const pizzas = items.map((item) => <NavLink key={item.id} to={`/pizza/${item.id}`}><PizzaBlock {...item}/></NavLink>)
+    const pizzas = items.map((item) =>
+        <NavLink key={item.id} to={`/pizza/${item.id}`}>
+            <PizzaBlock {...item}/>
+        </NavLink>)
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
 
     return (
