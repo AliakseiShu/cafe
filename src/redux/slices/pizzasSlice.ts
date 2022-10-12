@@ -10,11 +10,10 @@ type paramsType = {
     order: string,
     search: string
 }
-export type ItemsTypePizzas = {
+export type PizzasInitialType = {
     items: ItemsType[]
     status: 'loading' | 'success' | 'error'
 }
-
 
 export const fetchPizzas = createAsyncThunk(
     'pizza/fetchPizzasStatus',
@@ -25,7 +24,7 @@ export const fetchPizzas = createAsyncThunk(
     }
 )
 
-const initialState: ItemsTypePizzas = {
+const initialState: PizzasInitialType = {
     items: [],
     status: 'loading'
 }

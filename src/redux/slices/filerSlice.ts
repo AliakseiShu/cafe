@@ -2,14 +2,14 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {SortTypeProps} from "../../pages/Home";
 import {RootState} from "../store";
 
-type InitialStateType = {
+type InitialFilterStateType = {
     searchValue: string
     categoryId: number
     pageCount: number
     sort: SortTypeProps
 }
 
-const initialState: InitialStateType = {
+const initialState: InitialFilterStateType = {
     searchValue: '',
     categoryId: 0,
     pageCount: 1,
