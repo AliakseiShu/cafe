@@ -13,6 +13,11 @@ export const list = [
     {name: 'алфавиту (ASK)', sortProperty: '-title'},
 ]
 
+type PopupClick = MouseEvent & {
+    //composedPath:Node[]
+    path:Node[]
+}
+
 export const Sort = () => {
     const [open, setOpen] = useState(false);
 
@@ -27,9 +32,11 @@ export const Sort = () => {
     }
 
     useEffect(() => {
-        const handelClickBody = (event: any) => {
-            const click = event.composedPath().includes(sortRef.current)
-            if (!click) {
+        const handelClickBody = (event: MouseEvent) => {
+            const _event = event as MouseEvent & {
+                path: Node []
+            }
+            if (sortRef.current && !_event.path.includes(sortRef.current)) {
                 setOpen(false)
             }
         }

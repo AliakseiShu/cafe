@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useState} from 'react';
+import React, {ChangeEvent, MouseEventHandler, useCallback, useState} from 'react';
 import styles from './Search.module.scss';
 import searchSVG from '../../assets/img/search_icon.svg'
 import closeSVG from '../../assets/img/close_icon.svg'

@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {ItemsType} from "../App";
 
-export const FullPizza = () => {
+export const FullPizza: FC = () => {
 
     const [pizza, setPizza] = useState<ItemsType>();
     const {pizzaId} = useParams()
@@ -25,7 +25,7 @@ export const FullPizza = () => {
 
     if (!pizza) {
         return (
-            <div>Loading...</div>
+            <>Loading...</>
         )
     }
 
