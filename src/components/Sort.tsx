@@ -14,7 +14,6 @@ export const list = [
 ]
 
 type PopupClick = MouseEvent & {
-    //composedPath:Node[]
     path:Node[]
 }
 
@@ -33,9 +32,7 @@ export const Sort = () => {
 
     useEffect(() => {
         const handelClickBody = (event: MouseEvent) => {
-            const _event = event as MouseEvent & {
-                path: Node []
-            }
+            const _event = event as PopupClick
             if (sortRef.current && !_event.path.includes(sortRef.current)) {
                 setOpen(false)
             }
