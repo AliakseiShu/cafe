@@ -3,21 +3,27 @@ import {ItemsType} from "../../App";
 import {pizzasApi} from "../../api/pizzasApi";
 import {RootState} from "../store";
 
-type paramsType = {
+type ParamsType = {
     currentPage: number,
     category: string,
     sortBy: string,
     order: string,
     search: string
 }
+export enum Status {
+    LOADING = 'loading',
+    SUCCESS = 'success',
+    ERROR = 'error'
+}
+
 export type PizzasInitialType = {
     items: ItemsType[]
-    status: 'loading' | 'success' | 'error'
+    status: Status
 }
 
 export const fetchPizzas = createAsyncThunk(
     'pizza/fetchPizzasStatus',
-    async (params: paramsType, thunkAPI) => {
+    async (params: ParamsType, thunkAPI) => {
         const {category, sortBy, currentPage, order, search} = params
         const {data} = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
         return data
@@ -26,7 +32,7 @@ export const fetchPizzas = createAsyncThunk(
 
 const initialState: PizzasInitialType = {
     items: [],
-    status: 'loading'
+    status: Status.LOADING
 }
 
 export const pizzasSlice = createSlice({
@@ -37,19 +43,19 @@ export const pizzasSlice = createSlice({
             state.items = action.payload
         },
     },
-    extraReducers: {
-        [fetchPizzas.pending.toString()]: (state) => {
-            state.status = 'loading'
+    extraReducers: (builder) => {
+        builder.addCase(fetchPizzas.pending, (state, action) => {
+            state.status = Status.LOADING
             state.items = []
-        },
-        [fetchPizzas.fulfilled.toString()]: (state, action: PayloadAction<ItemsType[]>) => {
+        })
+        builder.addCase(fetchPizzas.fulfilled, (state, action:PayloadAction<ItemsType[]>) => {
             state.items = action.payload
-            state.status = 'success'
-        },
-        [fetchPizzas.rejected.toString()]: (state) => {
-            state.status = 'error'
+            state.status = Status.SUCCESS
+        })
+        builder.addCase(fetchPizzas.rejected, (state, action) => {
+            state.status = Status.ERROR
             state.items = []
-        }
+        })
     }
 })
 
