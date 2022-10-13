@@ -74,7 +74,7 @@ export const Home = () => {
 
 
     const pizzas = items.map((item) =>
-            <PizzaBlock {...item}/>
+            <PizzaBlock key={item.id} {...item}/>
       )
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
 

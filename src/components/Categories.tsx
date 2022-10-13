@@ -1,4 +1,5 @@
 import React, {FC} from "react";
+import  useWhyDidYouUpdate  from 'ahooks/lib/useWhyDidYouUpdate';
 
 type CategoriesType = {
     value: number
@@ -6,6 +7,8 @@ type CategoriesType = {
 }
 
 export const Categories:FC<CategoriesType> = ({value, onClickCategory}) => {
+
+    useWhyDidYouUpdate('Categories',{value, onClickCategory} )
 
     const categories = [
         'Все',
