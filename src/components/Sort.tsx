@@ -1,8 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
-import {SortTypeProps} from "../pages/Home";
+import React, {FC, memo, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../redux/store";
 import {setSort} from "../redux/slices/filerSlice";
+import {RootState} from "../redux/store";
 
 export const list = [
     {name: 'популярности (DESC)', sortProperty: 'rating'},
@@ -14,10 +13,15 @@ export const list = [
 ]
 
 type PopupClick = MouseEvent & {
-    path:Node[]
+    path: Node[]
 }
 
-export const Sort = () => {
+export type SortTypeProps = {
+    name: string
+    sortProperty: string
+}
+
+export const Sort = memo(() => {
     const [open, setOpen] = useState(false);
 
     const sort = useSelector((state: RootState) => state.filter.sort)
@@ -39,7 +43,7 @@ export const Sort = () => {
         }
         document.body.addEventListener('click', handelClickBody)
         return () => document.body.removeEventListener('click', handelClickBody)
-          }, []);
+    }, []);
 
     return (
         <div ref={sortRef} className="sort">
@@ -65,4 +69,4 @@ export const Sort = () => {
                 </div>}
         </div>
     )
-}
+})

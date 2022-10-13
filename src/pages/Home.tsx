@@ -16,13 +16,7 @@ import {
 } from "../redux/slices/filerSlice";
 import {useSearchParams} from "../hooks/useSearchParamsHook";
 import {fetchPizzas, selectPizzasItems, selectStatus} from "../redux/slices/pizzasSlice";
-import {NavLink} from "react-router-dom";
 
-
-export type SortTypeProps = {
-    name: string
-    sortProperty: string
-}
 export const Home = () => {
 
     const categoryId = useAppSelector(selectCategoryId)
@@ -82,7 +76,7 @@ export const Home = () => {
         <div className="container">
             <div className="content__top">
                 <Categories value={categoryId} onClickCategory={onClickCategory}/>
-                <Sort/>
+                <Sort />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             {

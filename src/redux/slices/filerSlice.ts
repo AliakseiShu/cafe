@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {SortTypeProps} from "../../pages/Home";
 import {RootState} from "../store";
+import {SortTypeProps} from "../../components/Sort";
 
 type InitialFilterStateType = {
     searchValue: string
