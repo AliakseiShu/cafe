@@ -74,9 +74,8 @@ export const Home = () => {
 
 
     const pizzas = items.map((item) =>
-        <NavLink key={item.id} to={`/pizza/${item.id}`}>
             <PizzaBlock {...item}/>
-        </NavLink>)
+      )
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
 
     return (

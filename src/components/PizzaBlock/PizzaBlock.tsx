@@ -2,6 +2,7 @@ import React, {FC, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addItem, CartItemsType} from "../../redux/slices/cartSlice";
 import {RootState} from "../../redux/store";
+import {NavLink} from "react-router-dom";
 
 type PizzaBlockType = {
     id: string
@@ -39,11 +40,13 @@ export const PizzaBlock: FC<PizzaBlockType> = ({id, title, price, imageUrl, size
 
     return (
         <div className="pizza-block-wrapper">
-            <div className="pizza-block"><a href="/pizza/7">
+            <div className="pizza-block">
+                <NavLink key={id} to={`/pizza/${id}`}>
                 <img className="pizza-block__image"
                      src={imageUrl}
                      alt="Pizza"/><h4
-                className="pizza-block__title">{title}</h4></a>
+                className="pizza-block__title">{title}</h4>
+                </NavLink>
                 <div className="pizza-block__selector">
                     <ul>
                         {types.map((type) => (
