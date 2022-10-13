@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, memo} from "react";
 import  useWhyDidYouUpdate  from 'ahooks/lib/useWhyDidYouUpdate';
 
 type CategoriesType = {
@@ -6,7 +6,7 @@ type CategoriesType = {
     onClickCategory: (index: number) => void
 }
 
-export const Categories:FC<CategoriesType> = ({value, onClickCategory}) => {
+export const Categories:FC<CategoriesType> = memo(({value, onClickCategory}) => {
 
     useWhyDidYouUpdate('Categories',{value, onClickCategory} )
 
@@ -31,4 +31,4 @@ export const Categories:FC<CategoriesType> = ({value, onClickCategory}) => {
             </ul>
         </div>
     )
-}
+})

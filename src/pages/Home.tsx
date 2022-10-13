@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Categories} from "../components/Categories";
 import {Sort} from "../components/Sort";
 import {Skeleton} from "../components/PizzaBlock/Skeleton";
@@ -40,9 +40,9 @@ export const Home = () => {
         currentPage: currentPageParams
     } = useSearchParams("sortProperty", "categoryId", "currentPage")
 
-    const onClickCategory = (index: number) => {
+    const onClickCategory = useCallback((index: number) => {
         dispatch(setCategoryId(index))
-    }
+    },[]);
 
     const onChangePage = (page: number) => {
         dispatch(setCurrenPage(page))
