@@ -4,8 +4,10 @@ import {useDispatch} from "react-redux";
 
 import {useAppSelector} from "../redux/store";
 import {CartItem} from "../components/CartItem";
-import {clearItem, selectItems, selectTotalPrice} from "../redux/slices/cartSlice";
+
 import {CartEmpty} from "../components/CartEmpty";
+import {selectItems, selectTotalPrice} from "../redux/slices/cart/selectors";
+import {clearItem} from "../redux/slices/cart/slice";
 
 export const Cart = () => {
 

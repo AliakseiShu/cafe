@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
 import filterReducer from './slices/filerSlice'
-import cartReducer from "./slices/cartSlice";
+import cartReducer from "./slices/cart/slice";
 import pizzasReducer from "./slices/pizzasSlice";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 

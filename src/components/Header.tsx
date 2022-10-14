@@ -4,7 +4,7 @@ import {Search} from "./Search/Search";
 import logoSVG from '../assets/img/pizza-logo.svg'
 
 import {useAppSelector} from "../redux/store";
-import {selectItems, selectTotalPrice} from "../redux/slices/cartSlice";
+import {selectItems, selectTotalPrice} from "../redux/slices/cart/selectors";
 
 export const Header = () => {
 

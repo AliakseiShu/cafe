@@ -1,8 +1,9 @@
 import React, {FC, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addItem, CartItemsType} from "../../redux/slices/cartSlice";
 import {RootState} from "../../redux/store";
 import {NavLink} from "react-router-dom";
+import {addItem} from "../../redux/slices/cart/slice";
+import {CartItemsType} from "../../redux/slices/cart/types";
 
 type PizzaBlockType = {
     id: string
