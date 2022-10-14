@@ -1,13 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
-import {Categories} from "../components/Categories";
-import {Sort} from "../components/Sort";
-import {Skeleton} from "../components/PizzaBlock/Skeleton";
-import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
-import {Pagination} from "../components/Pagination/Pagination";
+import {Skeleton, PizzaBlock, Sort, Categories, Pagination} from "../components";
 import {useAppDispatch, useAppSelector} from "../redux/store";
-
 import {useSearchParams} from "../hooks/useSearchParamsHook";
-
 import {
     selectCategoryId,
     selectCurrentPage,

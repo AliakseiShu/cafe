@@ -21,20 +21,16 @@ export type ItemsType = {
 
 export const App = () => {
     return (
+        <Suspense fallback={<div>Loading...</div>}>
         <Routes>
             <Route path="/" element={<MainLayout />}>
             <Route path="" element={<Home />}/>
-            <Route path="cart" element={<Suspense fallback={<div>Loading...</div>}>
-                <Cart />
-            </Suspense>}/>
-            <Route path="pizza/:pizzaId" element={<Suspense fallback={<div>Loading...</div>}>
-                <FullPizza />
-            </Suspense>}/>
-            <Route path="*" element={<Suspense fallback={<div>Loading...</div>}>
-                <Page404 />
-            </Suspense>}/>
+            <Route path="cart" element={<Cart />}/>
+            <Route path="pizza/:pizzaId" element={<FullPizza />}/>
+            <Route path="*" element={<Page404 />}/>
             </Route>
         </Routes>
+        </Suspense>
     );
 }
 
