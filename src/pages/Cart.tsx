@@ -6,10 +6,11 @@ import {useAppSelector} from "../redux/store";
 import {CartItem} from "../components/CartItem";
 
 import {CartEmpty} from "../components/CartEmpty";
-import {selectItems, selectTotalPrice} from "../redux/slices/cart/selectors";
-import {clearItem} from "../redux/slices/cart/slice";
+import {selectItems, selectTotalPrice} from "../redux/cart/selectors";
+import {clearItem} from "../redux/cart/slice";
+import MyComponent from "./www";
 
-export const Cart = () => {
+const Cart = () => {
 
     const dispatch = useDispatch()
     const items = useAppSelector(selectItems)
@@ -91,4 +92,5 @@ export const Cart = () => {
     );
 };
 
+export default Cart;
 

@@ -1,5 +1,4 @@
-import {Status} from "./slice";
-import {ItemsType} from "../../../App";
+import {ItemsType} from "../../App";
 
 export type ParamsType = {
     currentPage: number,
@@ -12,4 +11,10 @@ export type ParamsType = {
 export type PizzasInitialType = {
     items: ItemsType[]
     status: Status
+}
+
+export enum Status {
+    LOADING = 'loading',
+    SUCCESS = 'success',
+    ERROR = 'error'
 }

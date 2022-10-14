@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import {Route, Routes} from "react-router-dom";
 import {Home} from "./pages/Home";
-import {Cart} from "./pages/Cart";
 import {Page404} from "./pages/Page404";
 
 import './scss/app.scss';
 import {FullPizza} from "./pages/FullPizza";
 import {MainLayout} from "./layouts/MainLayout";
+
+const Cart = React.lazy(() => import('../src/pages/Cart'));
+
 
 export type ItemsType = {
     id: string;
@@ -24,7 +26,9 @@ export const App = () => {
         <Routes>
             <Route path="/" element={<MainLayout />}>
             <Route path="" element={<Home />}/>
-            <Route path="cart" element={<Cart />}/>
+            <Route path="cart" element={<Suspense fallback={<div>Loading</div>}>
+                <Cart />
+            </Suspense>}/>
             <Route path="pizza/:pizzaId" element={<FullPizza />}/>
             <Route path="*" element={<Page404 />}/>
             </Route>

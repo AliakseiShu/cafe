@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useDispatch} from "react-redux";
-import {addItem, minusItem, removeItem} from "../redux/slices/cart/slice";
-import {CartItemsType} from "../redux/slices/cart/types";
+import {addItem, minusItem, removeItem} from "../redux/cart/slice";
+import {CartItemsType} from "../redux/cart/types";
 
 export const CartItem: FC<CartItemsType> = (
     {

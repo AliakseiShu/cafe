@@ -4,7 +4,7 @@ import searchSVG from '../../assets/img/search_icon.svg'
 import closeSVG from '../../assets/img/close_icon.svg'
 import {debounce} from "lodash";
 import {useAppDispatch} from "../../redux/store";
-import {setSearchValue} from "../../redux/slices/filter/slice";
+import {setSearchValue} from "../../redux/filter/slice";
 
 
 export const Search = () => {

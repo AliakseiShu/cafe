@@ -1,4 +1,4 @@
-import {SortTypeProps} from "../../../components/Sort";
+import {SortTypeProps} from "../../components/Sort";
 
 export type InitialFilterStateType = {
     searchValue: string

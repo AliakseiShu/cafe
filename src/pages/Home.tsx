@@ -13,10 +13,10 @@ import {
     selectCurrentPage,
     selectSearchValue,
     selectSortProperty
-} from "../redux/slices/filter/selectors";
-import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filter/slice";
-import {fetchPizzas} from "../redux/slices/pizzas/slice";
-import {selectPizzasItems, selectStatus} from "../redux/slices/pizzas/selectors";
+} from "../redux/filter/selectors";
+import {setCategoryId, setCurrenPage, setFilters} from "../redux/filter/slice";
+import {selectPizzasItems, selectStatus} from "../redux/pizzas/selectors";
+import {fetchPizzas} from "../redux/pizzas/asyncActions";
 
 export const Home = () => {
 

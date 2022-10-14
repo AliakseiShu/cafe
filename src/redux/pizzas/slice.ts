@@ -1,23 +1,8 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ParamsType, PizzasInitialType} from "./types";
-import {pizzasApi} from "../../../api/pizzasApi";
-import {ItemsType} from "../../../App";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {PizzasInitialType, Status} from "./types";
+import {ItemsType} from "../../App";
+import {fetchPizzas} from "./asyncActions";
 
-
-export enum Status {
-    LOADING = 'loading',
-    SUCCESS = 'success',
-    ERROR = 'error'
-}
-
-export const fetchPizzas = createAsyncThunk(
-    'pizza/fetchPizzasStatus',
-    async (params: ParamsType, thunkAPI) => {
-        const {category, sortBy, currentPage, order, search} = params
-        const {data} = await pizzasApi.getPizzas(currentPage, category, sortBy, order, search)
-        return data
-    }
-)
 
 const initialState: PizzasInitialType = {
     items: [],
