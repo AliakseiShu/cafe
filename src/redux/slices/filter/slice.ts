@@ -1,16 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-/*
-import {RootState} from "../store";
-import {SortTypeProps} from "../../components/Sort";
-
-/!*
-type InitialFilterStateType = {
-    searchValue: string
-    categoryId: number
-    pageCount: number
-    sort: SortTypeProps
-}
-*!/
+import {InitialFilterStateType} from "./types";
+import {SortTypeProps} from "../../../components/Sort";
 
 const initialState: InitialFilterStateType = {
     searchValue: '',
@@ -38,7 +28,7 @@ export const filterSlice = createSlice({
         setCurrenPage: (state, action: PayloadAction<number>) => {
             state.pageCount = action.payload
         },
-        setFilters: (state, action: PayloadAction<{categoryId: string, currentPage: string, sort: string}>) => {
+        setFilters: (state, action: PayloadAction<{ categoryId: string, currentPage: string, sort: string }>) => {
             state.categoryId = Number(action.payload.categoryId)
             state.pageCount = Number(action.payload.currentPage)
             state.sort.sortProperty = action.payload.sort
@@ -46,12 +36,6 @@ export const filterSlice = createSlice({
     }
 })
 
-export const selectCategoryId = (state: RootState) => state.filter.categoryId
-export const selectSortProperty = (state: RootState) => state.filter.sort.sortProperty
-export const selectCurrentPage = (state: RootState) => state.filter.pageCount
-export const selectSearchValue = (state: RootState) => state.filter.searchValue
-
 export const {setCategoryId, setSort, setCurrenPage, setFilters, setSearchValue} = filterSlice.actions
 export default filterSlice.reducer
 
-*/

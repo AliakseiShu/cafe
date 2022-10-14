@@ -1,7 +1,8 @@
-import React, {FC, memo, useEffect, useRef, useState} from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setSort} from "../redux/slices/filerSlice";
+
 import {RootState} from "../redux/store";
+import {setSort} from "../redux/slices/filter/slice";
 
 export const list = [
     {name: 'популярности (DESC)', sortProperty: 'rating'},

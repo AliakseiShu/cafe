@@ -5,17 +5,16 @@ import {Skeleton} from "../components/PizzaBlock/Skeleton";
 import {PizzaBlock} from "../components/PizzaBlock/PizzaBlock";
 import {Pagination} from "../components/Pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../redux/store";
+
+import {useSearchParams} from "../hooks/useSearchParamsHook";
+import {fetchPizzas, selectPizzasItems, selectStatus} from "../redux/slices/pizzasSlice";
 import {
     selectCategoryId,
     selectCurrentPage,
     selectSearchValue,
-    selectSortProperty,
-    setCategoryId,
-    setCurrenPage,
-    setFilters
-} from "../redux/slices/filerSlice";
-import {useSearchParams} from "../hooks/useSearchParamsHook";
-import {fetchPizzas, selectPizzasItems, selectStatus} from "../redux/slices/pizzasSlice";
+    selectSortProperty
+} from "../redux/slices/filter/selectors";
+import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filter/slice";
 
 export const Home = () => {
 
