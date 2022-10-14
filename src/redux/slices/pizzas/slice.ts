@@ -1,24 +1,13 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ItemsType} from "../../App";
-import {pizzasApi} from "../../api/pizzasApi";
-import {RootState} from "../store";
+import {ParamsType, PizzasInitialType} from "./types";
+import {pizzasApi} from "../../../api/pizzasApi";
+import {ItemsType} from "../../../App";
 
-type ParamsType = {
-    currentPage: number,
-    category: string,
-    sortBy: string,
-    order: string,
-    search: string
-}
+
 export enum Status {
     LOADING = 'loading',
     SUCCESS = 'success',
     ERROR = 'error'
-}
-
-export type PizzasInitialType = {
-    items: ItemsType[]
-    status: Status
 }
 
 export const fetchPizzas = createAsyncThunk(
@@ -59,8 +48,7 @@ export const pizzasSlice = createSlice({
     }
 })
 
-export const selectStatus = (state: RootState) => state.pizzas.status
-export const selectPizzasItems = (state: RootState) => state.pizzas.items
+
 
 export const {setItems} = pizzasSlice.actions
 export default pizzasSlice.reducer

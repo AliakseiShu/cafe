@@ -7,7 +7,7 @@ import {Pagination} from "../components/Pagination/Pagination";
 import {useAppDispatch, useAppSelector} from "../redux/store";
 
 import {useSearchParams} from "../hooks/useSearchParamsHook";
-import {fetchPizzas, selectPizzasItems, selectStatus} from "../redux/slices/pizzasSlice";
+
 import {
     selectCategoryId,
     selectCurrentPage,
@@ -15,6 +15,8 @@ import {
     selectSortProperty
 } from "../redux/slices/filter/selectors";
 import {setCategoryId, setCurrenPage, setFilters} from "../redux/slices/filter/slice";
+import {fetchPizzas} from "../redux/slices/pizzas/slice";
+import {selectPizzasItems, selectStatus} from "../redux/slices/pizzas/selectors";
 
 export const Home = () => {
 
