@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcafe=self.webpackChunkcafe||[]).push([[845],{5574:function(e,n,c){c.r(n);c(2791);var r=c(8454),u=c(184);n.default=function(){return(0,u.jsx)(u.Fragment,{children:(0,u.jsx)(r.vr,{})})}}}]);
+//# sourceMappingURL=Page404.420fe1c2.chunk.js.map
