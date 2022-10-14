@@ -1,14 +1,12 @@
 import React, {Suspense} from 'react';
 import {Route, Routes} from "react-router-dom";
 import {Home} from "./pages/Home";
-import {Page404} from "./pages/Page404";
-
 import './scss/app.scss';
-import {FullPizza} from "./pages/FullPizza";
 import {MainLayout} from "./layouts/MainLayout";
 
-const Cart = React.lazy(() => import('../src/pages/Cart'));
-
+const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */'../src/pages/Cart'));
+const FullPizza = React.lazy(() => import(/* webpackChunkName: "FullPizza" */'../src/pages/FullPizza'));
+const Page404 = React.lazy(() => import(/* webpackChunkName: "Page404" */'../src/pages/Page404'));
 
 export type ItemsType = {
     id: string;
@@ -26,11 +24,15 @@ export const App = () => {
         <Routes>
             <Route path="/" element={<MainLayout />}>
             <Route path="" element={<Home />}/>
-            <Route path="cart" element={<Suspense fallback={<div>Loading</div>}>
+            <Route path="cart" element={<Suspense fallback={<div>Loading...</div>}>
                 <Cart />
             </Suspense>}/>
-            <Route path="pizza/:pizzaId" element={<FullPizza />}/>
-            <Route path="*" element={<Page404 />}/>
+            <Route path="pizza/:pizzaId" element={<Suspense fallback={<div>Loading...</div>}>
+                <FullPizza />
+            </Suspense>}/>
+            <Route path="*" element={<Suspense fallback={<div>Loading...</div>}>
+                <Page404 />
+            </Suspense>}/>
             </Route>
         </Routes>
     );
